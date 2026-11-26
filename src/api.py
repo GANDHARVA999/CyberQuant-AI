@@ -54,6 +54,7 @@ class LoginRequest(BaseModel): username: str = Field(min_length=1, max_length=80
 class LoginLimitRequest(BaseModel): login_limit_per_hour: int = Field(ge=1, le=500)
 class RegisterRequest(BaseModel):
     username: str = Field(min_length=3, max_length=40, pattern=r"^[A-Za-z0-9._-]+$")
+    email: str = Field(min_length=3, max_length=254)
     password: str = Field(min_length=12, max_length=256)
 class PasswordRequest(BaseModel): current_password: str = Field(min_length=1, max_length=256); new_password: str = Field(min_length=12, max_length=256)
 class ServerCreateRequest(BaseModel): display_name: str = Field(min_length=2, max_length=80); hostname: str = Field(min_length=2, max_length=255); sector: str = Field(min_length=2, max_length=80)
@@ -107,7 +108,7 @@ def current_user(request: Request):
 @app.middleware("http")
 async def require_dashboard_login(request: Request, call_next):
     path = request.url.path
-    public = {"/", "/api/v1/health", "/api/v1/auth/login", "/api/v1/auth/me", "/api/v1/auth/register", "/api/v1/auth/config"}
+    public = {"/", "/api/v1/health", "/api/v1/auth/login", "/api/v1/auth/me", "/api/v1/auth/register", "/api/v1/auth/config", "/api/v1/auth/forgot", "/api/v1/auth/reset", "/api/v1/auth/google/start", "/api/v1/auth/google/callback"}
     if path.startswith("/api/") and path not in public and not path.startswith("/api/v1/telemetry/"):
         try:
             user = current_user(request)
@@ -161,7 +162,8 @@ def password_problem(pw: str):
 
 @app.get("/api/v1/auth/config")
 def auth_config():
-    return {"signup_enabled": os.getenv("CYBERQUANT_ALLOW_SIGNUP", "1") != "0", "min_password_length": 12}
+    from . import auth_extra
+    return {"signup_enabled": os.getenv("CYBERQUANT_ALLOW_SIGNUP", "1") != "0", "min_password_length": 12, **auth_extra.extra_config()}
 
 @app.post("/api/v1/auth/register")
 def register(payload: RegisterRequest, request: Request, response: Response):
@@ -171,10 +173,13 @@ def register(payload: RegisterRequest, request: Request, response: Response):
     if len(recent) >= 5: raise HTTPException(429, "Too many accounts created from this IP address. Try again later.")
     problem = password_problem(payload.password)
     if problem: raise HTTPException(422, problem)
+    from .auth_extra import normalize_email
+    email = normalize_email(payload.email)
     if rows("SELECT 1 FROM users WHERE username=?", (payload.username,)): raise HTTPException(409, "That user ID is taken. Pick another.")
+    if rows("SELECT 1 FROM users WHERE lower(email)=?", (email,)): raise HTTPException(409, "That email already has an account. Sign in or use Forgot password.")
     SIGNUPS[ip] = recent + [t]
     with connection() as con:
-        cur = con.execute("INSERT INTO users(username,password_hash,created_at,must_change_password) VALUES(?,?,?,0)", (payload.username, hash_password(payload.password), now().isoformat()))
+        cur = con.execute("INSERT INTO users(username,password_hash,created_at,must_change_password,email) VALUES(?,?,?,0,?)", (payload.username, hash_password(payload.password), now().isoformat(), email))
         uid = cur.lastrowid
     issue_session(response, uid)
     write_audit("account_created", "user", str(uid), {"ip_address": ip})
@@ -605,3 +610,6 @@ def threat_center_page(request: Request): return page(request, "threat_center.ht
 
 @app.get("/server-ai")
 def server_ai_page(request: Request): return page(request, "server_ai.html")
+
+from . import auth_extra as _auth_extra
+app.include_router(_auth_extra.router)

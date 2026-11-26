@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CyberQuant AI | Choose a new password</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/theme.css">
+<div class="auth">
+<section class="auth-art"><div class="brand" style="position:relative;z-index:1"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.6-7 10-3.8-1.4-7-5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span>CyberQuant AI<small>Cyber risk intelligence</small></span></div>
+<div style="position:relative;z-index:1"><h2>Know which requests are attacks, and where your security budget should go.</h2><p>Connect a server, watch traffic in real time, review borderline cases and let the platform optimise your protection spend.</p>
+<ul><li>Genuine vs brute force, SQL injection and DDoS, classified live</li><li>Learns from your reviews: same user, same IP, same pattern</li><li>Budget plans that cut the most loss for the least money</li></ul></div>
+<small style="position:relative;z-index:1;opacity:.8">SDG 9 · Industry, Innovation and Infrastructure</small></section>
+<section class="auth-form"><main class="auth-card"><span class="eyebrow">Password reset</span>
+<h1 id="ttl" style="margin-top:10px">Choose a new password</h1><p class="muted" id="sub">Use 12+ characters with upper-case, lower-case and a number.</p>
+<form id="form"><label>New password<span style="position:relative;display:block"><input id="password" type="password" autocomplete="new-password" required minlength="12" style="padding-right:64px"><button type="button" id="eye" aria-label="Show password" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);width:auto;margin:0;padding:6px 10px;background:none;border:0;color:var(--muted,#667);font-weight:600;cursor:pointer">Show</button></span></label>
+<div style="margin-top:8px"><div style="height:6px;border-radius:3px;background:#e4e9f4;overflow:hidden"><i id="bar" style="display:block;height:100%;width:0;background:#e5484d;transition:width .2s,background .2s"></i></div><small id="hint" class="muted">Too short</small></div>
+<label>Confirm new password<input id="confirm" type="password" autocomplete="new-password" required></label>
+<button class="primary" id="go">Save new password</button><div id="error" class="error" role="alert"></div></form>
+<p class="muted" style="margin-top:16px"><a href="/" id="back">Back to sign in</a></p></main></section></div>
+<script>
+const $=id=>document.getElementById(id),token=new URLSearchParams(location.search).get('token')||'';
+if(!token){$('form').style.display='none';$('ttl').textContent='This link is not valid';$('sub').textContent='Open the link from your email again, or ask for a new reset link on the sign-in page.'}
+$('eye').onclick=()=>{const h=$('password').type==='password';$('password').type=h?'text':'password';$('confirm').type=h?'text':'password';$('eye').textContent=h?'Hide':'Show'};
+function score(p){let n=0;if(p.length>=12)n++;if(p.length>=16)n++;if(/[a-z]/.test(p)&&/[A-Z]/.test(p))n++;if(/\d/.test(p))n++;if(/[^A-Za-z0-9]/.test(p))n++;return n}
+$('password').oninput=()=>{const n=score($('password').value);$('bar').style.width=n*20+'%';$('bar').style.background=['#e5484d','#e5484d','#f0a020','#f0a020','#2fb67c','#2fb67c'][n];$('hint').textContent=['Too short','Weak','Fair','Okay','Strong','Very strong'][n]};
+$('form').onsubmit=async x=>{x.preventDefault();const er=$('error');er.textContent='';
+ if($('password').value!==$('confirm').value){er.textContent='The two passwords do not match.';return}
+ $('go').disabled=true;
+ try{const r=await fetch('/api/v1/auth/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token,new_password:$('password').value})});const d=await r.json().catch(()=>({}));
+  if(r.ok){$('form').style.display='none';$('ttl').textContent='Password changed';$('sub').textContent='You can sign in with your new password now.';$('back').textContent='Go to sign in';$('back').className='primary';$('back').style.cssText='display:inline-block;padding:11px 18px;border-radius:12px;text-decoration:none;color:#fff'}
+  else er.textContent=Array.isArray(d.detail)?'Password needs 12+ characters with upper-case, lower-case and a number.':(d.detail||'Something went wrong. Try again.')}
+ catch(_){er.textContent='Cannot reach the server. Check that it is running and try again.'}
+ $('go').disabled=false};
+</script>
+</html>

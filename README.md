@@ -15,6 +15,19 @@ uvicorn src.api:app --reload           # open http://127.0.0.1:8000  (sign in wi
 pytest -q                              # 30+ tests
 ```
 
+## Forgot password and Sign in with Google
+
+Both are optional and switch on from a local `.env` file (copy `.env.example` to `.env`, which is git-ignored).
+
+**Forgot password.** On the sign-in page, choose *Forgot password?* and enter the email or user ID. A single-use link, valid for 30 minutes, opens `/reset-password`. Every active session of that account is signed out when the password changes. Without mail settings the link is printed in the server console and shown on screen, for local use only. To send real email, set the `CYBERQUANT_SMTP_*` values (for Gmail, create an app password in your Google account security settings).
+
+**Sign in with Google.**
+1. In Google Cloud Console, open *APIs & Services > Credentials > Create credentials > OAuth client ID*, type *Web application*.
+2. Add this authorised redirect URI exactly: `http://127.0.0.1:8000/api/v1/auth/google/callback` (use your own address in production, with `https`).
+3. Put the client ID and secret in `.env` as `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`, then restart.
+
+The first Google sign-in with a verified email either signs in the existing account with that email or creates a new account. Users can also link Google from *Settings*. The server checks the state value, PKCE, the token audience and issuer, and that Google verified the email.
+
 ## How it answers the project brief
 
 | Requirement | Where |

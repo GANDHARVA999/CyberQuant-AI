@@ -56,6 +56,10 @@ CREATE TABLE IF NOT EXISTS user_sessions (
  token_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id), expires_at TEXT NOT NULL,
  created_at TEXT NOT NULL, last_seen_at TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS password_resets (
+ token_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id), expires_at TEXT NOT NULL,
+ created_at TEXT NOT NULL, used_at TEXT
+);
 CREATE TABLE IF NOT EXISTS login_attempts (
  id INTEGER PRIMARY KEY AUTOINCREMENT, attempted_at TEXT NOT NULL, username TEXT NOT NULL,
  ip_address TEXT NOT NULL, success INTEGER NOT NULL, user_id INTEGER REFERENCES users(id)
@@ -134,6 +138,8 @@ MIGRATIONS = [   # (table, column, definition): applied to databases created by 
     ("server_events", "incident_id", "INTEGER"),
     ("monitored_servers", "asset_id", "TEXT"),
     ("users", "must_change_password", "INTEGER NOT NULL DEFAULT 0"),
+    ("users", "email", "TEXT"),
+    ("users", "google_sub", "TEXT"),
 ]
 
 def initialize():
@@ -143,3 +149,5 @@ def initialize():
             if column not in {row["name"] for row in con.execute(f"PRAGMA table_info({table})")}:
                 con.execute(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
         con.execute("CREATE INDEX IF NOT EXISTS idx_server_event_incident ON server_events(incident_id)")
+        con.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(lower(email)) WHERE email IS NOT NULL")
+        con.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_users_google ON users(google_sub) WHERE google_sub IS NOT NULL")

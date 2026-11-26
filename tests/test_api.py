@@ -56,11 +56,51 @@ def test_signup_then_login_and_weak_password_rejected(tmp_path, monkeypatch):
     monkeypatch.setenv("CYBERQUANT_DB", str(tmp_path / "t.db"))
     from src import api
     with TestClient(api.app) as c:
-        assert c.post("/api/v1/auth/register", json={"username": "ravi", "password": "short"}).status_code == 422
-        assert c.post("/api/v1/auth/register", json={"username": "ravi", "password": "alllowercase1234"}).status_code == 422
-        ok = c.post("/api/v1/auth/register", json={"username": "ravi", "password": "Strong-Pass-2026"})
+        assert c.post("/api/v1/auth/register", json={"username": "ravi", "email": "ravi@example.com", "password": "short"}).status_code == 422
+        assert c.post("/api/v1/auth/register", json={"username": "ravi", "email": "ravi@example.com", "password": "alllowercase1234"}).status_code == 422
+        ok = c.post("/api/v1/auth/register", json={"username": "ravi", "email": "ravi@example.com", "password": "Strong-Pass-2026"})
         assert ok.status_code == 200 and c.get("/api/v1/auth/me").json()["authenticated"]
-        assert c.post("/api/v1/auth/register", json={"username": "RAVI", "password": "Strong-Pass-2026"}).status_code == 409
+        assert c.post("/api/v1/auth/register", json={"username": "RAVI", "email": "other@example.com", "password": "Strong-Pass-2026"}).status_code == 409
         c.post("/api/v1/auth/logout")
         assert c.get("/home", follow_redirects=False).status_code in (302, 307)
         assert c.post("/api/v1/auth/login", json={"username": "ravi", "password": "Strong-Pass-2026"}).status_code == 200
+
+
+def test_forgot_and_reset_password(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+    monkeypatch.setenv("CYBERQUANT_DEV_RESET_LINKS", "1"); monkeypatch.delenv("CYBERQUANT_SMTP_HOST", raising=False)
+    from src import database, api
+    monkeypatch.setattr(database, "DB_PATH", tmp_path / "r.db")
+    with TestClient(api.app) as c:
+        assert c.post("/api/v1/auth/register", json={"username": "meera", "email": "meera@example.com", "password": "Strong-Pass-2026"}).status_code == 200
+        c.post("/api/v1/auth/logout")
+        unknown = c.post("/api/v1/auth/forgot", json={"identifier": "nobody@example.com"}).json()
+        assert "dev_link" not in unknown                               # no hint whether the account exists
+        known = c.post("/api/v1/auth/forgot", json={"identifier": "Meera@Example.com"}).json()
+        token = known["dev_link"].split("token=")[1]
+        assert c.post("/api/v1/auth/reset", json={"token": token, "new_password": "weakweakweak"}).status_code == 422
+        assert c.post("/api/v1/auth/reset", json={"token": token, "new_password": "Brand-New-Pass-77"}).status_code == 200
+        assert c.post("/api/v1/auth/reset", json={"token": token, "new_password": "Another-Pass-88x"}).status_code == 400   # single use
+        assert c.post("/api/v1/auth/login", json={"username": "meera", "password": "Brand-New-Pass-77"}).status_code == 200
+
+
+def test_google_sign_in_creates_and_reuses_account(tmp_path, monkeypatch):
+    import base64, json, time
+    from fastapi.testclient import TestClient
+    monkeypatch.setenv("GOOGLE_CLIENT_ID", "cid"); monkeypatch.setenv("GOOGLE_CLIENT_SECRET", "secret")
+    from src import database, api, auth_extra
+    monkeypatch.setattr(database, "DB_PATH", tmp_path / "g.db")
+    claims = {"aud": "cid", "iss": "https://accounts.google.com", "exp": time.time() + 300, "email": "Sam@Gmail.com", "email_verified": True, "sub": "g-123"}
+    jwt = "h." + base64.urlsafe_b64encode(json.dumps(claims).encode()).decode().rstrip("=") + ".s"
+    monkeypatch.setattr(auth_extra, "exchange_code", lambda code, verifier, redirect: jwt)
+    with TestClient(api.app, follow_redirects=False) as c:
+        start = c.get("/api/v1/auth/google/start")
+        assert start.status_code in (302, 307) and "accounts.google.com" in start.headers["location"] and "code_challenge" in start.headers["location"]
+        state = c.cookies.get("cq_oauth").split(".")[0]
+        assert c.get("/api/v1/auth/google/callback", params={"code": "x", "state": "wrong"}).headers["location"].startswith("/?error=")
+        ok = c.get("/api/v1/auth/google/callback", params={"code": "x", "state": state})
+        assert ok.headers["location"] == "/home" and c.get("/api/v1/auth/me").json()["username"] == "sam"
+        c.post("/api/v1/auth/logout")
+        start = c.get("/api/v1/auth/google/start"); state = c.cookies.get("cq_oauth").split(".")[0]
+        c.get("/api/v1/auth/google/callback", params={"code": "x", "state": state})
+        assert api.rows("SELECT COUNT(*) AS n FROM users WHERE google_sub='g-123'")[0]["n"] == 1
