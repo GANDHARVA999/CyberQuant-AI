@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CyberQuant AI | Risk overview</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/theme.css"><style>.controls-grid td:first-child{min-width:220px}</style>
+<header class="topbar"><div class="topbar-in"><a class="brand" href="/home"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.6-7 10-3.8-1.4-7-5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span>CyberQuant AI<small>Cyber risk intelligence</small></span></a><nav class="links"><a href="/home">Home</a><a href="/threat-center">Live traffic</a><a href="/server-ai">Budget plan</a><a href="/dashboard" class="on">Risk overview</a></nav></div></header>
+<main class="page">
+<span class="eyebrow">Risk overview</span>
+<h1>Where your server stands</h1>
+<p class="lead">The essentials in one place: how risky things are right now, which attacks are hurting most, what needs a decision today and what to do next.</p>
+<div class="inline"><select id="server"></select><label>Budget for the plan (₹) <input id="budget" type="number" min="1" value="300000" style="width:150px"></label></div>
+<section class="tiles" id="tiles" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr))"></section>
+<section class="grid2">
+ <div class="card"><h2>Overall risk level</h2><div id="level" class="muted">Loading…</div></div>
+ <div class="card"><h2>Attack mix and yearly loss</h2><div id="mix" class="muted">–</div></div>
+</section>
+<section class="grid2">
+ <div class="card"><h2>Needs your decision</h2><div id="queue" class="muted">–</div></div>
+ <div class="card"><h2>Top attacking sources</h2><div id="sources" class="muted">–</div></div>
+</section>
+<section class="card"><h2>Do these next</h2><div id="next" class="muted">–</div><p style="margin-top:12px"><a href="/server-ai"><b>Open the full budget plan →</b></a></p></section>
+<section class="card"><h2>Known vulnerabilities (NVD)</h2><div id="cves" class="muted">–</div></section>
+<p class="note" id="privacy"></p>
+</main>
+<script>
+const j=async(u,o)=>{let r=await fetch(u,o),d=await r.json();if(!r.ok)throw Error(d.detail||r.statusText);return d};
+const e=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const inr=v=>'₹'+Math.round(v).toLocaleString('en-IN');
+const COL={'Brute force':'#f2a516','SQL injection':'#f0506e','DDoS':'#7c5cff'};
+const SEV={critical:4,high:3,medium:2,low:1};
+async function load(){const s=await j('/api/v1/servers');server.innerHTML=s.map(x=>`<option value="${x.id}">${e(x.display_name)} — ${e(x.hostname)}</option>`).join('');
+  try{const k=localStorage.getItem('cq_server');if(k&&s.some(x=>String(x.id)===k))server.value=k}catch(_){}
+  server.onchange=()=>{try{localStorage.setItem('cq_server',server.value)}catch(_){}show()};budget.onchange=show;await show()}
+function level(open){const crit=open.find(i=>i.threat_type==='SQL injection'||SEV[i.severity]>=4),hi=open.filter(i=>SEV[i.severity]>=3).length;
+  if(crit)return['Critical','#f0506e',`An unreviewed ${e(crit.threat_type)} incident is open (${e(crit.severity)} severity).`];
+  if(hi||open.length>=5)return['High','#f2a516',`${open.length} unreviewed incident(s), ${hi} high severity.`];
+  if(open.length)return['Medium','#3b6cf6',`${open.length} unreviewed incident(s), none high severity.`];
+  return['Low','#16a37f','No unreviewed attack incidents.']}
+async function show(){
+  const [A,P]=await Promise.all([j('/api/v1/servers/'+server.value+'/analytics'),j('/api/v1/servers/'+server.value+'/budget-plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({budget_inr:+budget.value||300000})})]);
+  const T=A.traffic,open=A.incidents.filter(i=>i.status==='open'),[lv,lc,why]=level(open);
+  tiles.innerHTML=[['Requests (latest hour)',T.total.toLocaleString('en-IN'),''],['Flagged as attacks',T.total?Math.round(T.flagged/T.total*100)+'%':'0%','bad'],['Awaiting review',open.length,open.length?'warn':'good'],['Modelled yearly loss',inr(P.baseline_loss_inr),'bad'],['After your plan',inr(P.residual_loss_inr),'good']].map(t=>`<div class="tile ${t[2]}"><span>${t[0]}</span><b>${t[1]}</b></div>`).join('');
+  document.getElementById('level').innerHTML=`<div class="money" style="background:none;-webkit-text-fill-color:${lc};color:${lc}">${lv}</div><p>${why}</p><p class="muted" style="font-size:12px">Rule: Critical if a SQL-injection or critical incident is open; High if any high-severity incident or 5+ are open; Medium if any are open; otherwise Low. Based on incidents you have not yet reviewed.</p>`;
+  const mx=Math.max(...P.per_attack.map(a=>a.baseline_loss_inr),1);
+  mix.innerHTML=P.per_attack.map(a=>`<div style="margin:8px 0"><div style="display:flex;justify-content:space-between"><b style="color:${COL[a.attack]}">${e(a.attack)}</b><span>${inr(a.baseline_loss_inr)}/yr · ${(T.by_type[a.attack]||0)} requests</span></div><div class="bar"><i style="width:${a.baseline_loss_inr/mx*100}%;background:${COL[a.attack]}"></i></div></div>`).join('')+`<p class="muted" style="font-size:12px">Loss = incidents per year × share that succeed × cost per success. With your ${inr(P.budget_inr)} plan it falls by ${(P.reduction_pct*100).toFixed(0)}%.</p>`;
+  queue.innerHTML=open.length?open.slice().sort((a,b)=>(SEV[b.severity]||0)-(SEV[a.severity]||0)).slice(0,5).map(i=>`<div class="pat"><b style="color:${COL[i.threat_type]}">${e(i.threat_type)}</b> · ${e(i.severity)} · ${i.event_count} event(s) · ${Math.round(i.confidence*100)}% confidence<br><span class="muted">${e(i.path||'')} from ${e((i.source_ips||[]).slice(0,2).join(', '))}${i.source_count>2?' +'+(i.source_count-2)+' more':''}</span></div>`).join('')+'<p><a href="/threat-center"><b>Review them in Live traffic →</b></a></p>':'Nothing is waiting for review.';
+  const cnt={};A.incidents.forEach(i=>(i.source_ips||[]).forEach(ip=>{cnt[ip]=cnt[ip]||{n:0,t:{}};cnt[ip].n+=i.event_count/Math.max(i.source_count||1,1);cnt[ip].t[i.threat_type]=1}));
+  const top=Object.entries(cnt).sort((a,b)=>b[1].n-a[1].n).slice(0,6);
+  sources.innerHTML=top.length?'<table><tr><th>Source IP</th><th>Events</th><th>Attack</th></tr>'+top.map(([ip,v])=>`<tr><td>${e(ip)}</td><td>${Math.round(v.n)}</td><td class="muted">${Object.keys(v.t).map(e).join(', ')}</td></tr>`).join('')+'</table>':'No attacking sources recorded.';
+  next.innerHTML=P.action_plan.slice(0,3).map((c,i)=>`<div class="pat"><b>${i+1}. ${e(c.name)}</b> <span class="muted">· ${e(c.when)} · about ${c.deploy_days} day(s) · ${inr(c.cost_inr)}</span><br><span class="muted">${e(c.steps[0]||'')}</span></div>`).join('')||'No control fits this budget.';
+  privacy.textContent=A.privacy_notice;
+  const c=await Promise.all(['SQL injection','Brute force','DDoS'].map(t=>j('/api/v1/attacks/'+encodeURIComponent(t)+'/cves?limit=2').catch(()=>null)));
+  cves.innerHTML=c.filter(Boolean).map(x=>`<h3 style="margin:8px 0 4px">${e(x.attack)}</h3>`+(x.cves.length?x.cves.map(v=>`<div class="muted" style="padding:3px 0"><b>${e(v.cve_id)}</b> · CVSS ${v.cvss_score??'n/a'} · ${e(v.description).slice(0,160)}…</div>`).join(''):'<div class="muted">No matching records loaded.</div>')).join('')+'<p class="muted" style="font-size:12px">Matched by keywords: context, not proof that your server is affected.</p>'}
+load().catch(err=>{document.getElementById('level').textContent=err.message})
+</script></html>

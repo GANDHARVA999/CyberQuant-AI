@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CyberQuant AI | Live traffic &amp; Threat Center</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/theme.css"><style>.chead{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start;margin-bottom:10px}.livepill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;vertical-align:middle;margin-left:8px;background:var(--line2);color:var(--muted)}.livepill.on{background:var(--green-l);color:#0d7a5e}.livepill.on::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;animation:pulse 1.4s infinite}@keyframes pulse{50%{opacity:.25}}.typetiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.tt{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--panel2);border-left-width:4px;transition:background .3s}.tt b{font-size:22px}.tt.flash{background:#fff3c4}.tip{position:fixed;pointer-events:none;background:#1a2142;color:#fff;font-size:12px;padding:6px 10px;border-radius:8px;z-index:50;display:none;box-shadow:0 8px 20px rgba(26,33,66,.3);white-space:pre}.chip{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;margin-right:6px;color:#fff}.inc code{font-size:11.5px}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0 4px}.banner{display:flex;gap:16px;align-items:center;border-radius:18px;padding:16px 22px;color:#fff;margin:14px 0;transition:background .5s;box-shadow:var(--shadow)}.banner b{font-size:20px;letter-spacing:-.01em}.banner.clear{background:linear-gradient(135deg,#16a37f,#1fb5c9)}.banner.attack{background:linear-gradient(135deg,#f0506e,#7c5cff)}.banner.quiet{background:linear-gradient(135deg,#8a94b8,#a9b2d4)}.banner .bd{width:14px;height:14px;border-radius:50%;background:#fff;flex:none}.banner.attack .bd,.banner.clear .bd{animation:pulse 1.2s infinite}.banner.flash{animation:bflash .6s 3}@keyframes bflash{50%{filter:brightness(1.35)}}.banner button{margin-left:auto;background:#fff;color:#1a2142;border:0;font-weight:700}
+.fchips{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}.fchip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 14px;font-weight:600;color:var(--muted);cursor:pointer;font-size:13px}.fchip.on{background:var(--grad);color:#fff;border-color:transparent}.fsep{width:1px;height:22px;background:var(--line);margin:0 6px}
+.explain{border:1px dashed var(--line);border-radius:12px;padding:10px 14px;background:var(--panel2);font-size:13px;margin:8px 0}.explain div{padding:2px 0}
+.rps{font-size:46px;font-weight:800;letter-spacing:-.04em;line-height:1}.row3{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;margin-top:16px}
+.ep{margin:9px 0}.ep .nm{display:flex;justify-content:space-between;font-size:13px}.ep .bb{height:10px;border-radius:6px;background:var(--line2);overflow:hidden;display:flex;margin-top:3px}.ep .bb i{display:block;height:100%}
+.feed{max-height:392px;overflow:auto}.fi{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-bottom:1px solid var(--line2);animation:slidein .5s}.fi.new{background:var(--amber-l)}.fi .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:800;flex:none;font-size:12px}.fi small{color:var(--muted)}@keyframes slidein{from{opacity:0;transform:translateY(-10px)}}
+.rcard{border:1px solid var(--line);border-radius:20px;padding:22px 24px;background:var(--panel);box-shadow:var(--shadow)}.rcard h3{margin:0}.meter{height:10px;border-radius:6px;background:var(--line2);overflow:hidden;width:180px;display:inline-block;vertical-align:middle}.meter i{display:block;height:100%;background:var(--grad)}
+.bigbtn{padding:13px 20px;border-radius:14px;border:0;font-weight:700;font-size:15px;cursor:pointer;color:#fff}.bg-g{background:var(--green)}.bg-a{background:var(--pink)}.bg-b{background:#1a2142}.bg-s{background:var(--line2);color:var(--muted)}.kbd{font-size:11px;opacity:.7;margin-left:6px;border:1px solid currentColor;border-radius:5px;padding:0 5px}
+.toast{position:fixed;right:20px;bottom:20px;max-width:400px;background:#1a2142;color:#fff;border-radius:14px;padding:14px 16px;z-index:60;box-shadow:0 12px 30px rgba(26,33,66,.35);transform:translateY(20px);opacity:0;transition:.3s;pointer-events:none}.toast.on{opacity:1;transform:none}
+.sim button{margin-right:6px}.soc{--bg:#0b0f22;--panel:#131933;--panel2:#0f1530;--text:#e8ecff;--muted:#9aa5d1;--faint:#6f7aa8;--line:#262e55;--line2:#1b2243;--blue-l:#1b2750;--purple-l:#241e4d;--green-l:#0f3a31;--amber-l:#3a2f0f;--pink-l:#3a1822}.soc .topbar{background:#0f1530;border-color:#262e55}.soc .tip{background:#e8ecff;color:#10162b}.soc .note{background:#161d3c;color:var(--text)}.soc .fchip.on,.soc button.primary{color:#fff}.soc input,.soc select,.soc button:not(.primary):not(.bigbtn):not(.fchip){background:#161d3c;color:var(--text);border-color:#262e55}.soc .tile{background:var(--panel)}
+.soc canvas{background:transparent!important}.soc,.soc body{background:var(--bg)!important}@media(max-width:1000px){.row3{grid-template-columns:1fr}}</style>
+<header class="topbar"><div class="topbar-in"><a class="brand" href="/home"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.6-7 10-3.8-1.4-7-5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span>CyberQuant AI<small>Cyber risk intelligence</small></span></a><nav class="links"><a href="/home">Home</a><a href="/threat-center" class="on">Live traffic</a><a href="/server-ai">Budget plan</a><a href="/dashboard">Risk overview</a></nav></div></header>
+
+<main class="page">
+<span class="eyebrow">Live monitoring</span>
+<h1>Live traffic &amp; Threat Center</h1>
+<p class="lead">Every request to your connected server is classified as genuine or as one of three attacks: brute force, SQL injection or DDoS. Watch it happen, review the borderline cases and the system remembers your decisions.</p>
+<p class="note" id="notice">Select a connected server.</p>
+<div class="toolbar"><select id="server"><option>Loading servers…</option></select><button id="refresh">Refresh</button><label class="muted" style="margin:0"><input type="checkbox" id="autoRefresh" checked style="display:inline;margin:0 6px 0 4px"> live updates</label><button id="snd">🔇 Sound off</button><button id="socb">🌙 SOC mode</button></div>
+<div class="sim toolbar"><b>Demo:</b> <span class="muted">send simulated attack traffic through the real detector →</span><button class="primary" data-sim="Brute force">⚡ Brute force</button><button class="primary" data-sim="SQL injection">⚡ SQL injection</button><button class="primary" data-sim="DDoS">⚡ DDoS</button></div>
+
+<div class="banner quiet" id="banner"><span class="bd"></span><div><b id="bt">Checking your server…</b><div id="bs" style="opacity:.9;font-size:13px"></div></div><button id="bgo" style="display:none" class="bigbtn">Review now</button></div>
+
+<div class="fchips"><span class="muted">Time range:</span><button class="fchip on" data-h="1">Last hour</button><button class="fchip" data-h="24">Last 24 hours</button><button class="fchip" data-h="720">Last 30 days</button><span class="fsep"></span><span class="muted">Attack type:</span><button class="fchip on" data-ty="all">All</button><button class="fchip" data-ty="Brute force">Brute force ⓘ</button><button class="fchip" data-ty="SQL injection">SQL injection ⓘ</button><button class="fchip" data-ty="DDoS">DDoS ⓘ</button></div>
+<div class="explain" id="explain"></div>
+
+<section class="tiles">
+ <div class="tile"><span>Requests (in range)</span><b id="t_total">–</b></div>
+ <div class="tile good"><span>Classified genuine</span><b id="t_genuine" style="color:var(--green)">–</b></div>
+ <div class="tile bad"><span>Flagged as attack traffic</span><b id="t_flagged" style="color:var(--pink)">–</b></div>
+ <div class="tile warn"><span>Incidents awaiting your review</span><b id="t_queue" style="color:#c47f00">–</b></div>
+</section>
+
+<section class="row3">
+ <div class="card"><h2>Requests per second</h2><div class="rps" id="rps">–</div><div id="rpsn" class="muted" style="margin:4px 0 8px">–</div><canvas id="spark" style="height:90px"></canvas></div>
+ <div class="card"><h2>Genuine vs attack</h2><div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><canvas id="donut" width="170" height="170" style="width:170px;height:170px"></canvas><div id="dleg" style="flex:1;min-width:130px"></div></div></div>
+ <div class="card"><h2>Most targeted endpoints</h2><div id="eps" class="muted">–</div></div>
+</section>
+
+<section class="card" style="margin-top:16px"><div class="chead"><div><h2>Real-time traffic <span class="livepill" id="livepill">…</span></h2><div class="muted" id="liveinfo">Requests per minute, last 60 minutes. Updates every 3 seconds.</div></div>
+ <div class="legend" id="legend"></div></div>
+ <canvas id="rt" style="height:300px"></canvas>
+ <div class="typetiles" id="typetiles"></div>
+ <p class="muted" style="margin:10px 0 0">An attack line rises as soon as the detector flags requests. When you save a decision on an incident, its requests are counted as <b>confirmed</b> for that attack type, or move back to genuine if you mark them genuine.</p></section>
+
+<section class="grid2" style="margin-top:16px">
+ <div class="card"><h2>Where the attacks come from</h2><div class="muted" id="mapinfo">–</div><canvas id="map" style="height:300px;margin-top:8px"></canvas><div id="regs" style="margin-top:8px"></div><p class="muted" id="geonote" style="font-size:12px;margin:6px 0 0"></p></div>
+ <div class="card"><h2>Live attack feed</h2><div class="muted">Newest flagged requests first, up to 14 of each attack type so none hides the others.</div><div id="feedsum" style="margin:8px 0"></div><div class="feed" id="feed"></div></div>
+</section>
+
+<section class="card" style="margin-top:16px" id="reviewsec"><h2>Review queue: is this a real attack?</h2>
+ <p class="muted">Alerts are grouped into incidents (one attack = one incident). A few failed logins from one IP can be a forgotten password; many IPs against one account is an attack. Your decision is remembered for similar traffic and saved as a labelled example for the next model retrain. It never changes your firewall. Shortcuts: <span class="kbd">G</span> genuine, <span class="kbd">A</span> attack, <span class="kbd">B</span> block source, <span class="kbd">←</span> <span class="kbd">→</span> browse.</p>
+ <div id="queue"></div></section>
+
+<section class="grid2" style="margin-top:16px">
+ <div class="card"><h2>What the system has learned from you</h2><div id="patterns" class="muted"></div></div>
+ <div class="card"><h2>Recommended blocklist</h2><p class="muted">Sources you marked for blocking. Your connector can fetch this list (<code>GET /api/v1/telemetry/{id}/blocklist</code>) and enforce it.</p><div id="blocklist" class="muted"></div><div style="margin-top:8px"><button id="copybl">📋 Copy IP list</button> <button id="dlbl">⬇ Download .txt</button></div>
+ <h2 style="margin-top:20px">Auto-allowed (matched a pattern you approved)</h2><div id="autoAllowed" class="muted"></div></div>
+</section>
+
+<section class="grid2" style="margin-top:16px">
+ <div class="card"><h2>When do attacks happen?</h2><div class="muted">Attack requests by weekday and hour, last 28 days (your local time).</div><canvas id="heat" style="height:230px;margin-top:8px"></canvas></div>
+ <div class="card"><h2>Attacks per month</h2><div class="muted">Attack incidents over the last 12 months.</div><canvas id="mtotal" style="height:230px;margin-top:10px"></canvas></div>
+</section>
+<section class="grid2" style="margin-top:16px">
+ <div class="card"><h2>Which attack, month by month</h2><div class="muted">Brute force, SQL injection and DDoS incidents per month.</div><canvas id="mtype" style="height:250px;margin-top:10px"></canvas></div>
+ <div class="card"><h2>Incidents by type</h2><canvas id="types" width="520" height="220" style="max-width:100%"></canvas></div>
+</section>
+<section class="card" style="margin-top:16px"><div class="chead"><div><h2>A specific day: when did the attacks happen?</h2><div class="muted" id="dayinfo">Pick a day to see attack requests hour by hour.</div></div>
+ <div class="row" style="margin:0"><button id="dprev">‹</button><input type="date" id="dayp"><button id="dnext">›</button><button id="dlatest">Latest attack day</button></div></div>
+ <div class="muted" style="margin-top:12px">Last 35 days (incidents per day). <b>Click a day</b> to see it hour by hour below.</div><canvas id="dailyc" style="height:150px;margin-top:6px;cursor:pointer"></canvas><div class="legend" id="dlegend" style="margin:6px 0 10px"></div>
+ <canvas id="dayc" style="height:270px;margin-top:10px"></canvas><div id="daylist" style="margin-top:12px"></div></section>
+<section class="grid2" style="margin-top:16px">
+ <div class="card"><h2>How to reduce frequent threats</h2><div id="guidance" class="muted"></div></div>
+ <div class="card"><h2>Detection policy</h2><div id="policy" class="muted"></div></div>
+</section>
+</main><div class="tip" id="tip"></div><div class="toast" id="toast"></div>
+<script>
+const j=async(u,o)=>{let r=await fetch(u,o),d=await r.json();if(!r.ok)throw Error(d.detail||r.statusText);return d};
+const e=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=id=>document.getElementById(id);
+const COLORS={'genuine':'#7aa2ff','Brute force':'#f5a524','SQL injection':'#7c5cff','DDoS':'#f0506e'};
+const KEYS=['Brute force','SQL injection','DDoS'];
+const PALS={light:{grid:'#eef0fa',axis:'#98a1bf',label:'#667090',ink:'#1a2142',bg:'#ffffff',dot:'#c5cfec'},soc:{grid:'#262e55',axis:'#6f7aa8',label:'#9aa5d1',ink:'#e8ecff',bg:'#131933',dot:'#3a4684'}};
+let PAL=PALS.light;
+const EXPL={'Brute force':'Guessing passwords again and again until one works. Signs: many failed logins from one IP, or one account hit from many IPs.',
+ 'SQL injection':'Typing database commands into forms or web addresses so your site runs them. Signs: quotes, UNION SELECT or -- inside requests.',
+ 'DDoS':'Flooding the site with so many requests that real users cannot get in. Signs: a sudden jump from many IPs hitting the same page.'};
+let A,LV=null,CH=null,HOURS=1,TYPE='all',QI=0,Q=[],soundOn=false,soc=false,seen=new Set(),firstLive=true,lastState=null,actx=null,dayVal='',lastSig='',tick=0;
+// ---------- chart code kept from before
+const tip=document.getElementById('tip');
+function setup(c){const dpr=window.devicePixelRatio||1,w=c.clientWidth||600,h=c.clientHeight||260;c.width=w*dpr;c.height=h*dpr;const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,w,h);c._r=[];
+  if(!c._tip){c._tip=1;c.addEventListener('mousemove',ev=>{const b=c.getBoundingClientRect(),px=ev.clientX-b.left,py=ev.clientY-b.top;const r=(c._r||[]).find(r=>px>=r.x&&px<=r.x+r.w&&py>=r.y&&py<=r.y+r.h);if(r){tip.textContent=r.t;tip.style.display='block';tip.style.left=ev.clientX+14+'px';tip.style.top=ev.clientY+14+'px'}else tip.style.display='none'});c.addEventListener('mouseleave',()=>tip.style.display='none')}
+  return {x,w,h}}
+function niceMax(v){if(v<=5)return 5;const p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p;return Math.ceil((n<=1?1:n<=2?2:n<=5?5:10)*p/4)*4}
+function axes(x,w,h,L,T,B,max){x.font='11px Inter,system-ui';x.fillStyle=PAL.axis;x.strokeStyle=PAL.grid;x.lineWidth=1;for(let i=0;i<=4;i++){const yy=T+(h-T-B)*(1-i/4);x.beginPath();x.moveTo(L,yy);x.lineTo(w-8,yy);x.stroke();x.textAlign='right';x.fillText(Math.round(max*i/4),L-6,yy+4)}x.textAlign='left'}
+function legendFor(el,keys){el.innerHTML=keys.map(k=>`<span><i style="background:${COLORS[k]}"></i>${k==='genuine'?'Genuine':k}</span>`).join('')}
+function hhmm(t){return new Date(t).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
+function drawRealtime(R){
+  const c=document.getElementById('rt'),{x,w,h}=setup(c),S=R.series,L=40,T=12,B=26,keys=['genuine',...KEYS];
+  const max=niceMax(Math.max(...S.map(s=>Math.max(...keys.map(k=>s[k]))),1)),px=i=>L+(w-L-12)*i/(S.length-1),py=v=>T+(h-T-B)*(1-v/max);
+  axes(x,w,h,L,T,B,max);x.fillStyle=PAL.axis;S.forEach((s,i)=>{if(i%10===0||i===S.length-1){x.textAlign=i===S.length-1?'right':'left';x.fillText(hhmm(s.t),px(i),h-8)}});x.textAlign='left';
+  [...keys].reverse().forEach(k=>{const col=COLORS[k];
+    const g=x.createLinearGradient(0,T,0,h-B);g.addColorStop(0,col+(k==='genuine'?'38':'55'));g.addColorStop(1,col+'05');
+    x.beginPath();S.forEach((s,i)=>{const X=px(i),Y=py(s[k]);i?x.lineTo(X,Y):x.moveTo(X,Y)});x.lineTo(px(S.length-1),h-B);x.lineTo(px(0),h-B);x.closePath();x.fillStyle=g;x.fill();
+    x.beginPath();S.forEach((s,i)=>{const X=px(i),Y=py(s[k]);i?x.lineTo(X,Y):x.moveTo(X,Y)});x.strokeStyle=col;x.lineWidth=k==='genuine'?1.8:2.4;x.lineJoin='round';x.stroke();
+    const last=S[S.length-1];if(last[k]>0){x.beginPath();x.arc(px(S.length-1),py(last[k]),4.5,0,7);x.fillStyle=PAL.bg;x.fill();x.lineWidth=2.5;x.strokeStyle=col;x.stroke()}});
+  S.forEach((s,i)=>{c._r.push({x:px(i)-(w-L)/S.length/2,y:T,w:(w-L)/S.length,h:h-T-B,t:hhmm(s.t)+'\n'+keys.map(k=>(k==='genuine'?'Genuine':k)+': '+s[k]).join('\n')})});
+  legendFor(document.getElementById('legend'),keys);
+  document.getElementById('typetiles').innerHTML=KEYS.map(k=>`<div class="tt" id="tt-${k.replace(/ /g,'_')}" style="border-left-color:${COLORS[k]}"><span class="muted">${k}</span><br><b style="color:${COLORS[k]}">${R.flagged[k]}</b> <span class="muted">flagged · </span><b style="font-size:16px">${R.confirmed[k]}</b> <span class="muted">confirmed by you</span></div>`).join('')
+}
+function drawStacked(id,labels,rows,keys,fmt){
+  const c=document.getElementById(id),{x,w,h}=setup(c),L=38,T=14,B=30,tot=rows.map(r=>keys.reduce((a,k)=>a+r[k],0)),max=niceMax(Math.max(...tot,1)),gap=(w-L-8)/rows.length,bw=Math.min(46,gap*.68);
+  axes(x,w,h,L,T,B,max);
+  rows.forEach((r,i)=>{let y=h-B;const X=L+i*gap+(gap-bw)/2;keys.forEach(k=>{const bh=r[k]/max*(h-T-B);if(bh>0){x.fillStyle=COLORS[k];x.beginPath();x.roundRect?x.roundRect(X,y-bh,bw,bh,2):x.rect(X,y-bh,bw,bh);x.fill()}y-=bh});
+    x.fillStyle=PAL.label;x.textAlign='center';x.font='11px Inter,system-ui';if(rows.length<=14||i%2===0)x.fillText(labels[i],X+bw/2,h-11);
+    c._r.push({x:L+i*gap,y:T,w:gap,h:h-T-B,t:fmt(labels[i])+'\n'+keys.map(k=>k+': '+r[k]).join('\n')+(keys.length>1?'\nTotal: '+tot[i]:'')})});
+  return tot
+}
+function drawMonthly(M){
+  const lab=M.map(m=>new Date(m.month+'-02').toLocaleString([],{month:'short'}));
+  const fm=l=>l,names=M.map(m=>new Date(m.month+'-02').toLocaleString([],{month:'long',year:'numeric'}));
+  // total: single brand-purple bar per month, value on top
+  const c=document.getElementById('mtotal'),{x,w,h}=setup(c),L=38,T=22,B=30,max=niceMax(Math.max(...M.map(m=>m.total),1)),gap=(w-L-8)/M.length,bw=Math.min(40,gap*.62);axes(x,w,h,L,T,B,max);
+  M.forEach((m,i)=>{const bh=m.total/max*(h-T-B),X=L+i*gap+(gap-bw)/2;const g=x.createLinearGradient(0,h-B-bh,0,h-B);g.addColorStop(0,'#7c5cff');g.addColorStop(1,'#3b6cf6');x.fillStyle=g;x.beginPath();x.roundRect?x.roundRect(X,h-B-bh,bw,bh,4):x.rect(X,h-B-bh,bw,bh);x.fill();
+    x.textAlign='center';x.font='11px Inter,system-ui';x.fillStyle=PAL.label;x.fillText(lab[i],X+bw/2,h-11);if(m.total>0){x.fillStyle=PAL.ink;x.font='600 11px Inter,system-ui';x.fillText(m.total,X+bw/2,h-B-bh-6)}x.textAlign='left';
+    c._r.push({x:L+i*gap,y:T,w:gap,h:h-T-B,t:names[i]+'\nAttack incidents: '+m.total})});
+  drawStacked('mtype',lab,M,KEYS,l=>l);
+  const cc=document.getElementById('mtype');cc._r=cc._r.map((r,i)=>({...r,t:names[i]+'\n'+KEYS.map(k=>k+': '+M[i][k]).join('\n')+'\nTotal: '+M[i].total}));
+  const lg=document.getElementById('mtype').parentElement;if(!lg.querySelector('.legend')){const d=document.createElement('div');d.className='legend';d.style.marginTop='8px';legendFor(d,KEYS);lg.appendChild(d)}
+}
+function drawDay(D){
+  const dp=document.getElementById('dayp');dp.value=D.date;dayVal=D.date;
+  const labs=D.hours.map(h=>String(h.hour).padStart(2,'0'));const tot=D.hours.map(h=>KEYS.reduce((a,k)=>a+h[k],0));
+  drawStacked('dayc',labs.map(l=>l),D.hours,KEYS,l=>'Day '+D.date+', '+l+':00 to '+l+':59');
+  const sum=tot.reduce((a,b)=>a+b,0),peak=tot.indexOf(Math.max(...tot));
+  document.getElementById('dayinfo').textContent=sum?`${new Date(D.date+'T12:00').toDateString()}: ${sum} attack requests, busiest at ${labs[peak]}:00. Times are your local time.`:`${new Date(D.date+'T12:00').toDateString()}: no attack requests recorded on this day.`;
+  document.getElementById('daylist').innerHTML=D.incidents.length?D.incidents.map(i=>`<div class="pat"><span class="chip" style="background:${COLORS[i.threat_type]}">${e(i.threat_type)}</span><b>${new Date(i.first_at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</b> <span class="muted">to ${new Date(i.last_at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})} · ${i.events} request(s) · ${i.sources} source IP(s) · ${e(i.severity||'')} · ${i.status==='reviewed_attack'?'confirmed by you':i.status==='open'?'awaiting your review':'closed'}</span></div>`).join(''):'';
+}
+function bars(id,items,labels,values,color){
+  const c=document.getElementById(id),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);
+  if(!items.length){x.fillStyle=PAL.label;x.fillText('No incidents yet',20,35);return}
+  const max=Math.max(...values,1),gap=w/items.length;items.forEach((it,i)=>{const bh=values[i]/max*(h-55);x.fillStyle=COLORS[labels[i]]||color;x.fillRect(i*gap+14,h-35-bh,Math.max(14,gap-28),bh);x.fillStyle=PAL.label;x.font='11px system-ui';x.fillText(String(labels[i]).slice(0,16),i*gap+14,h-15);x.fillStyle=PAL.ink;x.fillText(values[i],i*gap+14,h-42-bh)})
+}
+
+// ---------- helpers
+function toast(msg,ms=5200){const t=$('toast');t.innerHTML=msg;t.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('on'),ms)}
+function beep(severe){if(!soundOn||!actx)return;[0,.16].slice(0,severe?2:1).forEach((d,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=severe?(i?660:880):740;o.type='sine';g.gain.value=.06;o.connect(g);g.connect(actx.destination);o.start(actx.currentTime+d);o.stop(actx.currentTime+d+.12)})}
+function ago(t){const s=Math.max(0,(Date.now()-new Date(t).getTime())/1000);return s<60?Math.round(s)+'s ago':s<3600?Math.round(s/60)+' min ago':s<86400?Math.round(s/3600)+' h ago':Math.round(s/86400)+' d ago'}
+const rng=(a,b)=>a+Math.random()*(b-a);
+// ---------- status banner
+function banner(){const st=LV.status,b=$('banner'),stale=st.stale_seconds>180;let cls,t,s='';
+  if(st.state==='attack'&&!stale){cls='attack';t='Under attack: '+st.attack;s=`${st.events_5m} flagged requests in the last 5 minutes · ${st.severity} severity`;$('bgo').style.display=''}
+  else if(stale){cls='quiet';t='No live traffic right now';s=`Last request ${st.stale_seconds<3600?Math.round(st.stale_seconds/60)+' min':Math.round(st.stale_seconds/3600)+' h'} ago`+(st.state==='attack'?` · it was an attack (${st.attack}). Showing the most recent data.`:'. Showing the most recent data.');$('bgo').style.display='none'}
+  else{cls='clear';t='All clear';s='No attacks in the last 5 minutes. Traffic looks normal.';$('bgo').style.display='none'}
+  b.className='banner '+cls;$('bt').textContent=t;$('bs').textContent=s;
+  const cur=st.state==='attack'&&!stale?'attack':cls;if(lastState&&lastState!=='attack'&&cur==='attack'){b.classList.add('flash');beep(true);toast('🚨 <b>'+e(st.attack)+'</b> detected')}lastState=cur}
+// ---------- requests per second
+function rps(){const r=LV.rate;$('rps').textContent=(r.per_sec_now||0).toFixed(1);const ratio=r.typical_per_min?r.per_min_now/r.typical_per_min:0;
+  $('rpsn').innerHTML=r.typical_per_min?`${r.per_min_now} requests this minute · <b style="color:${ratio>2?'#f0506e':ratio>1.4?'#f2a516':'#16a37f'}">${ratio.toFixed(1)}×</b> the typical ${r.typical_per_min}/min`:'Waiting for traffic';
+  const c=$('spark'),{x,w,h}=setup(c);if(!CH)return;const S=CH.realtime.series.map(s=>s.genuine+KEYS.reduce((a,k)=>a+s[k],0)),mx=Math.max(...S,1);
+  const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'#7c5cff55');g.addColorStop(1,'#7c5cff05');x.beginPath();S.forEach((v,i)=>{const X=i/(S.length-1)*(w-8)+4,Y=h-6-v/mx*(h-14);i?x.lineTo(X,Y):x.moveTo(X,Y)});x.lineTo(w-4,h);x.lineTo(4,h);x.fillStyle=g;x.fill();
+  x.beginPath();S.forEach((v,i)=>{const X=i/(S.length-1)*(w-8)+4,Y=h-6-v/mx*(h-14);i?x.lineTo(X,Y):x.moveTo(X,Y)});x.strokeStyle='#7c5cff';x.lineWidth=2;x.stroke();
+  const X=w-4,Y=h-6-S[S.length-1]/mx*(h-14);x.beginPath();x.arc(X,Y,4,0,7);x.fillStyle='#7c5cff';x.fill()}
+// ---------- donut
+function donut(){const sh=LV.share,tot=Object.values(sh).reduce((a,b)=>a+b,0),c=$('donut'),x=c.getContext('2d');x.clearRect(0,0,170,170);const keys=['genuine',...KEYS];
+  if(!tot){x.beginPath();x.arc(85,85,64,0,7);x.lineWidth=22;x.strokeStyle=PAL.dot;x.stroke();$('dleg').innerHTML='<span class="muted">🌤️ No traffic in this range yet.</span>';return}
+  let a=-Math.PI/2;keys.forEach(k=>{const v=sh[k]||0,d=v/tot*Math.PI*2;if(v){x.beginPath();x.arc(85,85,64,a,a+d);x.lineWidth=TYPE==='all'||TYPE===k||k==='genuine'?22:12;x.strokeStyle=COLORS[k];x.stroke()}a+=d});
+  const att=tot-sh.genuine;x.fillStyle=PAL.ink;x.textAlign='center';x.font='800 24px Inter,system-ui';x.fillText(Math.round(att/tot*100)+'%',85,88);x.font='11px Inter,system-ui';x.fillStyle=PAL.label;x.fillText('attack traffic',85,104);
+  $('dleg').innerHTML=keys.map(k=>`<div style="margin:4px 0;font-size:13px"><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${COLORS[k]};margin-right:6px"></i>${k==='genuine'?'Genuine':k} <b>${(sh[k]||0).toLocaleString()}</b></div>`).join('')}
+// ---------- endpoints
+function endpoints(){const E=LV.endpoints;if(!E.length){$('eps').innerHTML='🌤️ No requests in this range yet.';return}
+  const rows=E.map(p=>({...p,a:TYPE==='all'?p.attack:(p.types[TYPE]||0)})).sort((a,b)=>b.a-a.a||b.total-a.total),mx=Math.max(...rows.map(r=>r.total),1);
+  $('eps').innerHTML=rows.map(p=>`<div class="ep"><div class="nm"><code>${e(p.path)}</code><span class="muted">${p.a} attack / ${p.total} total</span></div><div class="bb" style="width:${Math.max(6,p.total/mx*100)}%">${KEYS.map(k=>{const v=p.types[k]||0;return v&&(TYPE==='all'||TYPE===k)?`<i style="width:${v/p.total*100}%;background:${COLORS[k]}"></i>`:''}).join('')}<i style="flex:1;background:${COLORS.genuine}55"></i></div></div>`).join('')}
+// ---------- attack map (dotted world, offline)
+const LAND=[[[-168,66],[-160,70],[-140,70],[-120,72],[-95,72],[-80,70],[-62,60],[-55,50],[-66,44],[-76,36],[-81,25],[-97,26],[-97,18],[-88,15],[-80,8],[-92,14],[-105,20],[-118,32],[-124,40],[-125,49],[-135,58],[-150,60],[-165,60]],
+ [[-55,60],[-45,60],[-20,70],[-20,82],[-60,82],[-70,76]],[[-80,10],[-62,11],[-50,0],[-35,-6],[-40,-22],[-58,-38],[-66,-55],[-74,-50],[-72,-30],[-77,-14],[-81,-4]],
+ [[-10,36],[-9,43],[-1,48],[5,52],[10,56],[5,62],[15,69],[30,71],[40,66],[40,56],[30,46],[28,41],[20,38],[12,38],[5,43],[-5,36]],
+ [[-17,21],[-10,30],[10,36],[32,31],[35,24],[43,12],[51,12],[41,-2],[40,-15],[33,-26],[20,-35],[12,-18],[9,-1],[8,5],[-8,4],[-17,14]],
+ [[40,56],[30,46],[40,38],[36,30],[50,28],[57,24],[60,22],[68,24],[72,20],[77,8],[80,15],[88,22],[92,20],[98,8],[104,1],[108,12],[120,22],[122,30],[122,40],[130,43],[142,52],[160,60],[180,66],[170,70],[140,72],[110,76],[80,73],[60,70],[60,60]],
+ [[114,-22],[122,-18],[131,-12],[142,-11],[153,-26],[150,-37],[138,-35],[124,-34],[115,-34]],[[-6,50],[2,51],[0,58],[-6,58]],[[130,31],[141,36],[142,45],[140,41],[132,34]],[[95,5],[105,-5],[120,-9],[140,-8],[140,-2],[120,2],[105,5]]];
+function inPoly(p,pt){let c=false;for(let i=0,k=pt.length-1;i<pt.length;k=i++){const a=pt[i],b=pt[k];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])c=!c}return c}
+const LANDDOTS=(()=>{const d=[];for(let lat=80;lat>=-58;lat-=3.4)for(let lon=-170;lon<=178;lon+=3.4)if(LAND.some(p=>inPoly([lon,lat],p)))d.push([lon,lat]);return d})();
+const SERVER=[73,19];let mapDots=[];
+function proj(lon,lat,w,h){return [(lon+180)/360*w,(80-lat)/138*h]}
+function drawMap(){const c=$('map');if(!c||!LV)return;const dpr=window.devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;if(!w)return;if(c.width!==Math.round(w*dpr)){c.width=w*dpr;c.height=h*dpr}
+  const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,w,h);x.fillStyle=PAL.dot;LANDDOTS.forEach(([lo,la])=>{const [px,py]=proj(lo,la,w,h);x.fillRect(px-1.5,py-1.5,3,3)});
+  const t=Date.now()/1000,dots=LV.dots.filter(d=>TYPE==='all'||d.type===TYPE),mx=Math.max(...dots.map(d=>d.count),1),[sx,sy]=proj(SERVER[0],SERVER[1],w,h);c._r=[];
+  dots.slice(0,40).forEach(d=>{const [px,py]=proj(d.lon,d.lat,w,h),mxp=(px+sx)/2,myp=Math.min(py,sy)-Math.abs(px-sx)*.18;x.beginPath();x.moveTo(px,py);x.quadraticCurveTo(mxp,myp,sx,sy);x.strokeStyle=COLORS[d.type]+'33';x.lineWidth=1;x.stroke()});
+  dots.forEach((d,i)=>{const [px,py]=proj(d.lon,d.lat,w,h),r=3+Math.sqrt(d.count/mx)*7,ph=(t*.8+i*.37)%1;x.beginPath();x.arc(px,py,r,0,7);x.fillStyle=COLORS[d.type]+'cc';x.fill();x.beginPath();x.arc(px,py,r+ph*14,0,7);x.strokeStyle=COLORS[d.type]+Math.round((1-ph)*90).toString(16).padStart(2,'0');x.lineWidth=1.5;x.stroke();c._r.push({x:px-r-3,y:py-r-3,w:2*r+6,h:2*r+6,t:`${d.ip}\n${d.type} · ${d.count} request(s)\n${d.region} (approx.)`})});
+  x.beginPath();x.arc(sx,sy,6,0,7);x.fillStyle='#16a37f';x.fill();x.lineWidth=3;x.strokeStyle=PAL.bg;x.stroke();x.fillStyle=PAL.ink;x.font='600 11px Inter,system-ui';x.fillText('Your server',sx+9,sy+4);c._r.push({x:sx-8,y:sy-8,w:16,h:16,t:'Your server (position illustrative)'})}
+function regions(){const dots=LV.dots.filter(d=>TYPE==='all'||d.type===TYPE);$('mapinfo').textContent=dots.length?`${dots.length} attacking IP address(es) in range. Bigger dots = more requests. Hover a dot for details.`:'🌤️ No attacking IPs in this range. Quiet is good.';
+  $('regs').innerHTML=LV.regions.slice(0,4).map(r=>`<span class="chip" style="background:#7c5cff">${e(r.region)}: ${r.count} req · ${r.ips} IP</span>`).join('');$('geonote').textContent=LV.geo_note}
+// ---------- feed
+function feed(){$('feedsum').innerHTML=KEYS.map(k=>`<span class="chip" style="background:${COLORS[k]}">${k}: ${(LV.share[k]||0).toLocaleString()} req</span>`).join('');const F=LV.feed.filter(f=>TYPE==='all'||f.type===TYPE);let fresh=false;
+  $('feed').innerHTML=F.length?F.slice(0,30).map(f=>{const key=f.t+f.ip+f.path+f.type,isNew=!seen.has(key);if(isNew&&!firstLive)fresh=true;seen.add(key);const ic={'Brute force':'BF','SQL injection':'SQ','DDoS':'DD'}[f.type];
+    return `<div class="fi ${isNew&&!firstLive?'new':''}"><div class="ic" style="background:${COLORS[f.type]}">${ic}</div><div><b>${e(f.type)}</b> <small>from <code>${e(f.ip)}</code> on <code>${e(f.path)}</code> → ${e(f.status??'')}</small><br><small>${ago(f.t)} · ${e(f.state)}${f.severity?' · '+e(f.severity):''}${f.source?' · '+e(f.source):''}</small></div></div>`}).join(''):'<div class="muted" style="padding:14px">🌤️ No attacks flagged yet. New ones appear here the moment they are detected.</div>';
+  if(fresh)beep(F.some(f=>f.severity==='critical'||f.severity==='high'))}
+// ---------- heatmap
+function heat(){const c=$('heat'),{x,w,h}=setup(c),H=LV.heatmap,mx=LV.heat_max,L=34,T=6,B=22,cw=(w-L-4)/24,ch=(h-T-B)/7,days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  if(!mx){x.fillStyle=PAL.label;x.font='13px Inter,system-ui';x.fillText('🌤️ No attacks recorded in the last 28 days.',20,40);return}
+  x.font='11px Inter,system-ui';H.forEach((row,d)=>{x.fillStyle=PAL.label;x.textAlign='right';x.fillText(days[d],L-6,T+d*ch+ch/2+4);row.forEach((v,hh)=>{const a=v?.18+.82*Math.sqrt(v/mx):0;x.fillStyle=v?`rgba(124,92,255,${a})`:PAL.grid;x.beginPath();x.roundRect?x.roundRect(L+hh*cw+1,T+d*ch+1,cw-2,ch-2,3):x.rect(L+hh*cw+1,T+d*ch+1,cw-2,ch-2);x.fill();c._r.push({x:L+hh*cw,y:T+d*ch,w:cw,h:ch,t:`${days[d]} ${String(hh).padStart(2,'0')}:00 · ${v} attack request(s)`})})});
+  x.textAlign='center';x.fillStyle=PAL.label;for(let hh=0;hh<24;hh+=3)x.fillText(String(hh).padStart(2,'0'),L+hh*cw+cw/2,h-6);x.textAlign='left'}
+function renderLive(){banner();rps();donut();endpoints();regions();drawMap();feed();heat();firstLive=false}
+async function loadLive(){if(!server.value||isNaN(+server.value))return;LV=await j(`/api/v1/servers/${server.value}/live?hours=${HOURS}&tz=${new Date().getTimezoneOffset()}`);renderLive()}
+function explain(){$('explain').innerHTML=TYPE==='all'?KEYS.map(k=>`<div><b style="color:${COLORS[k]}">${k}</b>: ${EXPL[k]}</div>`).join(''):`<b style="color:${COLORS[TYPE]}">${TYPE}</b>: ${EXPL[TYPE]}`}
+// ---------- charts loader (kept)
+async function loadCharts(flash){
+  if(!server.value||isNaN(+server.value))return;
+  const prev=CH&&CH.realtime.confirmed;
+  CH=await j(`/api/v1/servers/${server.value}/charts?tz=${new Date().getTimezoneOffset()}&day=${dayVal}`);
+  drawRealtime(CH.realtime);drawMonthly(CH.monthly);drawDay(CH.day);drawDaily(CH.daily);if(LV)rps();
+  const lp=$('livepill'),st=CH.stale_seconds;lp.className='livepill'+(st<180?' on':'');lp.textContent=st<180?'LIVE':'No new traffic';
+  $('liveinfo').textContent=st<180?'Requests per minute, last 60 minutes. Updates every 3 seconds.':`Showing the most recent 60 minutes of data. The last request arrived ${st<3600?Math.round(st/60)+' min':Math.round(st/3600)+' h'} ago; use the demo buttons above or start your connector to see it move.`;
+  if(flash&&prev)KEYS.forEach(k=>{if(CH.realtime.confirmed[k]!==prev[k]){const t=$('tt-'+k.replace(/ /g,'_'));if(t){t.classList.add('flash');setTimeout(()=>t.classList.remove('flash'),1600)}}})
+}
+function drawDaily(D){const c=$('dailyc'),{x,w,h}=setup(c),L=30,T=8,B=24,gap=(w-L-6)/D.length,bw=Math.max(4,gap*.7),max=niceMax(Math.max(...D.map(d=>d.total),1));
+  axes(x,w,h,L,T,B,max);D.forEach((d,i)=>{const X=L+i*gap+(gap-bw)/2;let y=h-B;KEYS.forEach(k=>{const bh=d[k]/max*(h-T-B);if(bh>0){x.fillStyle=COLORS[k];x.fillRect(X,y-bh,bw,bh)}y-=bh});
+    if(d.date===dayVal||(!dayVal&&CH&&d.date===CH.day.date)){x.strokeStyle=PAL.ink;x.lineWidth=2;x.strokeRect(X-2,T,bw+4,h-T-B+1)}
+    if(i%5===0||i===D.length-1){x.fillStyle=PAL.label;x.font='10px Inter,system-ui';x.textAlign='center';x.fillText(new Date(d.date+'T12:00').toLocaleDateString([],{day:'numeric',month:'short'}),X+bw/2,h-8)}
+    c._r.push({x:L+i*gap,y:T,w:gap,h:h-T-B,t:new Date(d.date+'T12:00').toDateString()+'\n'+(d.total?KEYS.map(k=>k+': '+d[k]).join('\n'):'No attacks')+'\n(click to open this day)',date:d.date})});
+  x.textAlign='left';$('dlegend').innerHTML=KEYS.map(k=>`<span><i style="background:${COLORS[k]}"></i>${k}</span>`).join('');
+  if(!c._clk){c._clk=1;c.addEventListener('click',ev=>{const b=c.getBoundingClientRect(),px=ev.clientX-b.left,py=ev.clientY-b.top,r=(c._r||[]).find(r=>px>=r.x&&px<=r.x+r.w&&py>=r.y&&py<=r.y+r.h);if(r&&r.date){dayVal=r.date;loadCharts()}})}}
+function shiftDay(n){const d=new Date((dayVal||new Date().toISOString().slice(0,10))+'T12:00');d.setDate(d.getDate()+n);dayVal=d.toISOString().slice(0,10);loadCharts()}
+// ---------- review cards
+const SUG={likely_genuine:['b-genuine','Likely genuine'],needs_review:['b-review','Needs your review'],likely_attack:['b-attack','Likely attack']};
+const when=t=>new Date(t).toLocaleString();
+const SEVR={critical:4,high:3,medium:2,low:1};
+function buildQueue(keepId){const open=A.incidents.filter(i=>i.status==='open').sort((a,b)=>(SEVR[b.severity]||0)-(SEVR[a.severity]||0)||new Date(b.last_at)-new Date(a.last_at));Q=open;const k=keepId?Q.findIndex(i=>i.id===keepId):-1;QI=k>=0?k:Math.min(QI,Math.max(0,Q.length-1));renderCard()}
+function renderCard(){const box=$('queue');if(!Q.length){box.innerHTML='<div class="rcard" style="text-align:center"><div style="font-size:34px">🎉</div><b>Nothing is waiting for review.</b><div class="muted">New borderline cases will appear here as they are detected.</div></div>';return}
+  const i=Q[QI],s=SUG[i.suggestion?.label]||SUG.needs_review,ips=i.source_ips.slice(0,3).join(', ')+(i.source_count>3?` +${i.source_count-3} more`:''),lead=i.source_ips[0]||'';
+  box.innerHTML=`<div class="rcard"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><span class="muted">Incident ${QI+1} of ${Q.length}</span><span><button id="qp">‹</button> <button id="qn">›</button></span></div>
+   <h3 style="margin-top:6px"><span class="chip" style="background:${COLORS[i.threat_type]}">${e(i.threat_type)}</span> <span class="sev-${e(i.severity)}">${e(i.severity)} severity</span> <span class="badge ${s[0]}">${s[1]}</span>${i.review_effect?` <span class="badge">learned: ${e(i.review_effect)}</span>`:''}</h3>
+   <div style="margin:10px 0">AI confidence <span class="meter"><i style="width:${i.confidence*100}%"></i></span> <b>${Math.round(i.confidence*100)}%</b> <span class="muted">· detected by ${e(i.detection_source||'')}</span></div>
+   <div style="background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px"><b>In plain words:</b> ${e(i.suggestion?.reason||'')}<ul class="basis" style="margin:8px 0 0">${i.basis.map(b=>`<li>${e(b)}</li>`).join('')}</ul></div>
+   <div class="muted" style="margin:10px 0">${i.event_count} flagged request(s) · ${i.source_count} source IP(s): ${e(ips)}${i.account?` · account <code>${e(i.account)}</code>`:''} · <code>${e(i.path||'')}</code> · ${when(i.first_at)} → ${when(i.last_at)}</div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="bigbtn bg-g" data-d="genuine" data-h="allow_similar">✓ Genuine, allow similar<span class="kbd">G</span></button><button class="bigbtn bg-a" data-d="attack" data-h="one_time">✕ Attack<span class="kbd">A</span></button><button class="bigbtn bg-b" data-d="attack" data-h="block_source">⛔ Attack and block ${lead?e(lead):'source'}<span class="kbd">B</span></button><button class="bigbtn bg-s" id="qs">Skip →</button></div>
+   <div style="margin-top:10px"><input id="qnote" placeholder="note (optional)" maxlength="500" size="30"> <a href="#" id="qone" class="muted">Genuine, only this one</a></div><div class="muted" id="qst" style="margin-top:6px"></div></div>`;
+  box.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>decide(b.dataset.d,b.dataset.h));$('qs').onclick=$('qn').onclick=()=>step(1);$('qp').onclick=()=>step(-1);$('qone').onclick=ev=>{ev.preventDefault();decide('genuine','one_time')}}
+function step(n){if(!Q.length)return;QI=(QI+n+Q.length)%Q.length;renderCard()}
+async function decide(decision,handling){const i=Q[QI];if(!i)return;const st=$('qst');try{const r=await j(`/api/v1/servers/${server.value}/incidents/${i.id}/review`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({decision,handling,note:$('qnote').value||null})});
+  toast('🧠 <b>What the AI learned</b><br>'+e(r.message),7000);await Promise.all([loadCharts(true),loadLive()]);setTimeout(()=>view(true),700);Q=Q.filter(x=>x.id!==i.id);QI=Math.min(QI,Math.max(0,Q.length-1));renderCard()}catch(err){st.textContent=err.message}}
+document.addEventListener('keydown',ev=>{if(/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)||ev.ctrlKey||ev.metaKey||!Q.length)return;const k=ev.key.toLowerCase();if(k==='g')decide('genuine','allow_similar');else if(k==='a')decide('attack','one_time');else if(k==='b')decide('attack','block_source');else if(k==='arrowright')step(1);else if(k==='arrowleft')step(-1)});
+// ---------- view
+async function view(force){
+  A=await j('/api/v1/servers/'+server.value+'/analytics');$('notice').textContent=A.privacy_notice;
+  const open=A.incidents.filter(i=>i.status==='open');$('t_queue').textContent=open.length;
+  const sig=A.incidents.map(i=>i.id+':'+i.event_count+':'+i.status).join(',');if(force||sig!==lastSig){lastSig=sig;buildQueue(Q[QI]&&Q[QI].id)}
+  A.review_patterns&&($('patterns').innerHTML=A.review_patterns.length?A.review_patterns.map(p=>`<div class="pat"><span class="badge ${p.decision==='genuine'?'b-genuine':'b-attack'}">${e(p.decision)}</span> <b>${e(p.threat_type)}</b> · ${e(p.handling.replace('_',' '))}<br><span class="muted">${p.source_ip?'IP '+e(p.source_ip)+' · ':''}${p.account?'account '+e(p.account)+' · ':''}${e(p.path||'')} · reviewed at volume ${p.volume}${p.note?' · “'+e(p.note)+'”':''}</span></div>`).join(''):'🧠 No reviews yet. Your decisions will appear here and apply to similar traffic.');
+  $('blocklist').innerHTML=A.blocklist.length?A.blocklist.map(b=>`<div class="pat"><code>${e(b.source_ip)}</code> <span class="muted">${e(b.threat_type)}</span></div>`).join(''):'Empty. Use “Attack and block” on an incident to add a source.';
+  $('autoAllowed').innerHTML=A.auto_allowed.length?A.auto_allowed.map(i=>`<div class="pat"><b>${e(i.threat_type)}</b> <span class="muted">${i.event_count} request(s), ${e(i.source_ips[0]||'')} · matched a reviewed genuine pattern</span></div>`).join(''):'None yet.';
+  bars('types',A.incident_types,A.incident_types.map(x=>x.threat_type),A.incident_types.map(x=>x.incidents),'#a895de');
+  $('guidance').innerHTML=A.mitigation_guidance.length?A.mitigation_guidance.map(g=>`<div class="pat"><b>${e(g.threat_type)}</b><br>${e(g.guidance)}</div>`).join(''):'No threats detected yet.';
+  $('policy').innerHTML=Object.entries(A.detection_policy).map(([n,r])=>`<div class="pat"><b>${e(n)}</b><br>${e(r)}</div>`).join('');
+  const t=A.traffic;if(HOURS===1){$('t_total').textContent=t.total.toLocaleString();$('t_genuine').textContent=t.genuine.toLocaleString();$('t_flagged').textContent=t.flagged.toLocaleString()}
+  loadCharts().catch(()=>{});loadLive().then(()=>{if(HOURS!==1){const s=LV.share,tot=Object.values(s).reduce((a,b)=>a+b,0);$('t_total').textContent=tot.toLocaleString();$('t_genuine').textContent=s.genuine.toLocaleString();$('t_flagged').textContent=(tot-s.genuine).toLocaleString()}}).catch(()=>{})
+}
+async function start(){const s=await j('/api/v1/servers');server.innerHTML=s.length?s.map(x=>`<option value="${x.id}">${e(x.display_name)} — ${e(x.hostname)}</option>`).join(''):'<option>No connected servers</option>';if(s.length){try{const k=localStorage.getItem('cq_server');if(k&&s.some(x=>String(x.id)===k))server.value=k}catch(_){}server.addEventListener('change',()=>{try{localStorage.setItem('cq_server',server.value)}catch(_){}firstLive=true;seen.clear();view(true)});explain();view()}}
+// ---------- controls
+document.querySelectorAll('[data-h]').forEach(b=>{if(b.classList.contains('fchip'))b.onclick=()=>{HOURS=+b.dataset.h;document.querySelectorAll('.fchip[data-h]').forEach(x=>x.classList.toggle('on',x===b));firstLive=true;seen.clear();view(true)}});
+document.querySelectorAll('[data-ty]').forEach(b=>b.onclick=()=>{TYPE=b.dataset.ty;document.querySelectorAll('.fchip[data-ty]').forEach(x=>x.classList.toggle('on',x===b));explain();if(LV){donut();endpoints();regions();drawMap();feed()}});
+document.querySelectorAll('[data-sim]').forEach(b=>b.onclick=async()=>{b.disabled=true;try{const r=await j(`/api/v1/servers/${server.value}/simulate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({attack:b.dataset.sim})});toast(`⚡ Simulated <b>${e(b.dataset.sim)}</b>: ${r.simulated} requests sent through the real detector, ${r.alerts_raised} alert(s) raised.`);await Promise.all([loadCharts(true),loadLive()]);view(true)}catch(err){toast('Could not simulate: '+e(err.message))}b.disabled=false});
+$('snd').onclick=()=>{soundOn=!soundOn;if(soundOn){actx=actx||new (window.AudioContext||window.webkitAudioContext)();beep(false)}$('snd').textContent=soundOn?'🔊 Sound on':'🔇 Sound off'};
+$('socb').onclick=()=>{soc=!soc;document.body.classList.toggle('soc',soc);PAL=soc?PALS.soc:PALS.light;$('socb').textContent=soc?'☀️ Light mode':'🌙 SOC mode';if(soc){try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}catch(_){}}else{try{document.fullscreenElement&&document.exitFullscreen()}catch(_){}}if(CH){drawRealtime(CH.realtime);drawMonthly(CH.monthly);drawDay(CH.day);drawDaily(CH.daily)}if(LV)renderLive();if(A)bars('types',A.incident_types,A.incident_types.map(x=>x.threat_type),A.incident_types.map(x=>x.incidents),'#a895de')};
+$('bgo').onclick=()=>$('reviewsec').scrollIntoView({behavior:'smooth'});
+$('copybl').onclick=async()=>{const t=(A&&A.blocklist||[]).map(b=>b.source_ip).join('\n');if(!t){toast('The blocklist is empty.');return}try{await navigator.clipboard.writeText(t)}catch(_){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast('📋 Copied '+A.blocklist.length+' IP(s) to the clipboard.')};
+$('dlbl').onclick=()=>{const t=(A&&A.blocklist||[]).map(b=>b.source_ip).join('\n');if(!t){toast('The blocklist is empty.');return}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain'}));a.download='cyberquant-blocklist.txt';a.click()};
+$('server').onchange=()=>{};$('refresh').onclick=()=>view(true);
+setInterval(()=>{if(!$('autoRefresh').checked)return;tick++;if(tick%4===0)view().catch(()=>{});else{loadCharts().catch(()=>{});if(HOURS<=24||tick%5===0)loadLive().catch(()=>{})}},3000);
+setInterval(drawMap,80);
+$('dayp').onchange=()=>{dayVal=$('dayp').value;loadCharts()};$('dprev').onclick=()=>shiftDay(-1);$('dnext').onclick=()=>shiftDay(1);$('dlatest').onclick=()=>{dayVal='';loadCharts()};
+window.addEventListener('resize',()=>{if(CH){drawRealtime(CH.realtime);drawMonthly(CH.monthly);drawDay(CH.day);drawDaily(CH.daily)}if(LV){rps();heat();drawMap()}});
+start().catch(x=>$('notice').textContent=x.message)
+
+</script></html>

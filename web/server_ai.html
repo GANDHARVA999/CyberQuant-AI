@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CyberQuant AI | Budget &amp; protection plan</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/theme.css"><style>.controls-grid td:first-child{min-width:220px}</style>
+<header class="topbar"><div class="topbar-in"><a class="brand" href="/home"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.6-7 10-3.8-1.4-7-5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span>CyberQuant AI<small>Cyber risk intelligence</small></span></a><nav class="links"><a href="/home">Home</a><a href="/threat-center">Live traffic</a><a href="/server-ai" class="on">Budget plan</a><a href="/dashboard">Risk overview</a></nav></div></header>
+<style>
+.hero{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:center}
+.gauge{position:relative;width:240px;height:140px}.gauge svg{width:240px;height:140px}.gauge .gv{position:absolute;left:0;right:0;bottom:6px;text-align:center}.gauge .gv b{font-size:30px;letter-spacing:-.03em}
+.slider{width:100%;accent-color:#7c5cff}.big{font-size:34px;font-weight:700;letter-spacing:-.03em}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 14px}.tabs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font-weight:600;color:var(--muted);cursor:pointer}.tabs button.on{background:var(--grad);color:#fff;border-color:transparent}
+.pane{display:none}.pane.on{display:block}
+.layers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.layer{border:2px solid var(--line);border-radius:14px;padding:12px;background:#fff;transition:.3s}.layer.lit{border-color:#7c5cff;background:linear-gradient(180deg,#f3f0ff,#fff);box-shadow:0 6px 18px rgba(124,92,255,.15)}.layer h4{margin:0 0 6px;font-size:14px}.layer .c{font-size:12px;color:var(--muted);padding:2px 0}.layer .c.on{color:#16a37f;font-weight:600}
+.chip{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;background:#eef1fb;color:#4a5578;margin:2px 3px 2px 0}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.plan3{border:2px solid var(--line);border-radius:16px;padding:16px;background:#fff;position:relative}.plan3.rec{border-color:#7c5cff;box-shadow:0 10px 26px rgba(124,92,255,.18)}.plan3 .tag{position:absolute;top:-11px;right:14px;background:var(--grad);color:#fff;border-radius:999px;font-size:11px;padding:3px 10px;font-weight:700}
+.shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}.item{border:2px solid var(--line);border-radius:14px;padding:12px;background:#fff;cursor:pointer;transition:.2s}.item:hover{border-color:#b9a8ff}.item.in{border-color:#16a37f;background:#f0fbf7}.item.no{opacity:.45;cursor:not-allowed}
+.sim button.atk{margin-right:8px}.rd{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}.rd input{margin-top:4px;width:18px;height:18px}
+#report{display:none}
+@media print{body>*:not(#report){display:none!important}#report{display:block!important;padding:20px;font-family:system-ui,sans-serif;color:#111}#report h1,#report h2{margin:14px 0 6px}#report table{border-collapse:collapse;width:100%}#report td,#report th{border:1px solid #bbb;padding:4px 8px;font-size:12px;text-align:left}}
+@media(max-width:900px){.hero,.layers,.cards3{grid-template-columns:1fr}}
+</style>
+<main class="page">
+<span class="eyebrow">Investment optimisation</span>
+<h1>Budget &amp; protection plan</h1>
+<p class="lead">Drag the slider and watch your protection change. Try the attacks, build your own plan against the AI, compare options and print a one-page report.</p>
+<div class="inline"><select id="server"></select></div>
+<section class="card" style="margin-top:14px">
+ <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px"><h2 style="margin:0">Your cyber-security fund</h2><div><span class="muted">₹</span> <input id="budget" type="number" min="0" step="10000" value="300000" style="width:140px"></div></div>
+ <input id="slider" class="slider" type="range" min="0" max="1500000" step="10000" value="300000" style="margin:14px 0">
+ <div class="hero">
+  <div class="gauge"><svg viewBox="0 0 240 140"><defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#16a37f"/><stop offset=".5" stop-color="#f2a516"/><stop offset="1" stop-color="#f0506e"/></linearGradient></defs><path d="M20 125 A100 100 0 0 1 220 125" fill="none" stroke="#e8ecf8" stroke-width="18" stroke-linecap="round"/><path id="arc" d="M20 125 A100 100 0 0 1 220 125" fill="none" stroke="url(#gg)" stroke-width="18" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314" style="transition:stroke-dashoffset .6s ease"/></svg><div class="gv"><b id="gpct">–</b><div class="muted" style="font-size:12px">risk remaining</div></div></div>
+  <div>
+   <div style="display:flex;gap:28px;flex-wrap:wrap"><div><div class="muted">Yearly loss now</div><div class="big" id="lbefore" style="color:#f0506e">–</div></div><div style="font-size:30px;color:#9aa5c8;align-self:center">→</div><div><div class="muted">With this plan</div><div class="big" id="lafter" style="color:#16a37f">–</div></div></div>
+   <p id="hline" class="muted" style="margin:8px 0 0"></p>
+   <div class="note" style="margin-top:10px"><b>Cost of doing nothing:</b> since you opened this page, an unprotected server would have lost <b id="tk0" style="color:#f0506e">₹0</b>; with this plan about <b id="tk1" style="color:#16a37f">₹0</b>. <span class="muted">(Modelled expected loss, ticking per second.)</span></div>
+  </div>
+ </div>
+</section>
+<nav class="tabs" id="tabs"><button data-t="over" class="on">Overview</button><button data-t="sim">Attack simulator</button><button data-t="build">Build your own</button><button data-t="cmp">Compare plans</button><button data-t="road">Roadmap</button><button data-t="evi">Evidence &amp; inputs</button></nav>
+
+<section class="pane on" id="p-over">
+ <div class="card"><h2>Your protection layers</h2><div class="layers" id="layers"></div></div>
+ <div class="grid2" style="margin-top:16px"><div class="card"><h2>Where the money goes</h2><div style="display:flex;gap:16px;flex-wrap:wrap"><canvas id="donut" width="220" height="220" style="cursor:pointer;width:220px;height:220px;flex:none"></canvas><div id="dleg" style="flex:1;min-width:200px"></div></div><div id="ddetail" class="muted" style="margin-top:10px">Click a slice to see what to buy.</div></div>
+ <div class="card"><h2>More budget vs more protection</h2><canvas id="frontier" width="520" height="250" style="max-width:100%"></canvas><div id="gist" class="muted" style="margin-top:8px"></div></div></div>
+ <div class="card" style="margin-top:16px"><h2>Loss before and after, by attack</h2><div id="perattack"></div></div>
+</section>
+
+<section class="pane" id="p-sim"><div class="card sim"><h2>Launch an attack on your server</h2>
+ <p class="muted">Each request passes through your funded layers. The chance a layer stops it comes from the modelled effect of the controls you can afford at this budget. The animation is illustrative: it samples those modelled probabilities.</p>
+ <div style="margin:10px 0"><button class="primary atk" data-a="SQL injection">Launch SQL injection</button><button class="primary atk" data-a="Brute force">Launch brute force</button><button class="primary atk" data-a="DDoS">Launch DDoS</button> <label style="margin-left:10px"><input type="checkbox" id="prot" checked> Protection ON</label></div>
+ <canvas id="sim" width="900" height="270" style="width:100%;max-width:900px;background:#fbfcff;border:1px solid var(--line);border-radius:14px"></canvas>
+ <div id="simres" class="muted" style="margin-top:10px">Choose an attack.</div></div></section>
+
+<section class="pane" id="p-build"><div class="card"><h2>You be the CISO</h2>
+ <p class="muted">Spend the fund yourself. Pick controls up to your budget, then reveal what the optimiser would have picked.</p>
+ <div id="bscore" style="margin:10px 0"></div><div style="margin:8px 0"><button id="breveal" class="primary">Reveal the AI plan</button> <button id="bclear">Clear</button></div><div class="shop" id="shop"></div></div></section>
+
+<section class="pane" id="p-cmp"><div class="card"><h2>Three ways to spend it</h2><div class="cards3" id="cmp"></div><p class="muted" id="cmpnote" style="margin-top:10px"></p></div></section>
+
+<section class="pane" id="p-road"><div class="card"><h2>Your 90-day roadmap</h2><p class="muted">Tick actions as you finish them. The line shows modelled yearly loss falling as each is done, assuming one team doing them in order.</p>
+ <canvas id="road" width="860" height="230" style="width:100%;max-width:860px"></canvas><div id="roadnow" style="margin:8px 0;font-weight:600"></div><div id="roadlist"></div></div></section>
+
+<section class="pane" id="p-evi">
+ <div class="card"><h2>Inputs and assumptions</h2><div class="grid2"><div><h3 style="margin:0 0 6px">What was detected</h3><div id="detected" class="muted">Select a server.</div>
+  <h3 style="margin:12px 0 4px">Linked asset (optional)</h3><select id="asset"><option value="">No linked asset</option></select> <button id="link">Save link</button> <span class="muted" id="linkst"></span></div>
+ <div><div class="inline"><label>Data covers (days) <input id="days" type="number" min="1" placeholder="auto" style="width:120px"></label><label>Aim to cut loss by (%) <input id="target" type="number" min="1" max="99" placeholder="optional" style="width:120px"></label></div>
+  <div class="inline" style="margin-top:8px"><label>SQL injection ₹ <input id="i-sql" type="number" value="1500000" style="width:120px"></label><label>Brute force ₹ <input id="i-bf" type="number" value="400000" style="width:120px"></label><label>DDoS ₹ <input id="i-ddos" type="number" value="800000" style="width:120px"></label></div>
+  <div class="inline"><label>SQLi success % <input id="s-sql" type="number" value="15" style="width:90px"></label><label>Brute-force % <input id="s-bf" type="number" value="5" style="width:90px"></label><label>DDoS % <input id="s-ddos" type="number" value="30" style="width:90px"></label></div>
+  <p class="muted" id="period" style="margin-top:8px"></p><div id="mincost" class="muted"></div></div></div></div>
+ <div class="card" style="margin-top:16px"><h2>Recommended actions in detail</h2><div id="actions"></div></div>
+ <div class="card" style="margin-top:16px"><h2>What each attack damages (researched)</h2><div id="intel"></div></div>
+ <div class="card" style="margin-top:16px"><h2>Every security element, researched</h2><div id="catalogue"></div></div>
+ <div class="card" style="margin-top:16px"><h2>Related vulnerabilities (NVD)</h2><div id="cves" class="muted">–</div></div>
+ <div class="card" style="margin-top:16px"><h2>Sources</h2><div id="srcs"></div></div>
+</section>
+<p style="margin:18px 0"><button class="primary" id="print">Download one-page report (PDF)</button> <span class="muted">Opens your browser's print dialog: choose “Save as PDF”.</span></p>
+<div id="report"></div>
+</main>
+<script>
+const j=async(u,o)=>{let r=await fetch(u,o),d=await r.json();if(!r.ok)throw Error(d.detail||r.statusText);return d};
+const e=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const inr=v=>'₹'+Math.round(v).toLocaleString('en-IN');
+const $=id=>document.getElementById(id);
+const ATT=['SQL injection','Brute force','DDoS'],TIERC={urgent:'#f0506e',soon:'#f2a516',planned:'#3b6cf6'},CATC=['#3b6cf6','#7c5cff','#f0506e','#f2a516','#16a37f'];
+const srcLink=l=>(l||[]).map(x=>`<a href="${e(x.url)}" target="_blank" rel="noopener">${e(x.title)}</a>`).join(' · ');
+let X=null,cart=new Set(),done=new Set(),selCat=null,tickT0=Date.now(),timer=null,simRun=0;
+// ---------- model helpers (same multiplicative model as the server)
+const base=()=>Object.fromEntries(X.per_attack.map(a=>[a.attack,a.baseline_loss_inr]));
+const cat=()=>Object.fromEntries(X.catalogue.map(c=>[c.id,c]));
+function resid(ids){const B=base(),C=cat();return ATT.reduce((s,a)=>s+(B[a]||0)*[...ids].reduce((r,i)=>r*(1-Math.min(C[i].effect[a]||0,.999)),1),0)}
+const baseTotal=()=>X.baseline_loss_inr;
+function bestAt(b){const f=X.frontier.filter(p=>p.cost_inr<=b+1e-9);return f.length?f[f.length-1]:{cost_inr:0,loss_avoided_inr:0,controls:[]}}
+function tween(el,to,fmt,ms=500){const from=+el.dataset.v||0,t0=performance.now(),tk=el._tk=(el._tk||0)+1;el.dataset.v=to;(function f(t){if(el._tk!==tk)return;const k=Math.min(1,(t-t0)/ms);el.textContent=fmt(from+(to-from)*k);if(k<1)requestAnimationFrame(f)})(t0);setTimeout(()=>{if(el._tk===tk)el.textContent=fmt(to)},ms+40)}
+// ---------- loading
+async function load(){const s=await j('/api/v1/servers');server.innerHTML=s.map(x=>`<option value="${x.id}">${e(x.display_name)} — ${e(x.hostname)}</option>`).join('');
+  try{const k=localStorage.getItem('cq_server');if(k&&s.some(x=>String(x.id)===k))server.value=k}catch(_){}
+  server.onchange=()=>{try{localStorage.setItem('cq_server',server.value)}catch(_){}show();recalc()};
+  const a=await j('/api/v1/assets');asset.innerHTML='<option value="">No linked asset</option>'+a.map(x=>`<option value="${e(x.asset_id)}">${e(x.asset_id)} — ${e(x.asset_name)}</option>`).join('');await show();await recalc()}
+async function show(){const A=await j('/api/v1/servers/'+server.value+'/analytics');asset.value=A.server.asset_id||'';
+  detected.innerHTML=A.incident_types.length?A.incident_types.map(x=>`<div class="pat"><b>${e(x.threat_type)}</b>: ${x.incidents} incident(s)</div>`).join(''):'No attack incidents detected on this server yet.';
+  const c=await Promise.all(ATT.map(t=>j('/api/v1/attacks/'+encodeURIComponent(t)+'/cves?limit=3').catch(()=>null)));
+  cves.innerHTML=c.filter(Boolean).map(x=>`<h3 style="margin:8px 0 4px">${e(x.attack)} <span class="muted">(${x.cwe.join(', ')})</span></h3>`+(x.cves.length?x.cves.map(v=>`<div class="muted" style="padding:4px 0"><b>${e(v.cve_id)}</b> · CVSS ${v.cvss_score??'n/a'} · ${e(v.description)}</div>`).join(''):'<div class="muted">No matching records loaded locally.</div>')).join('')+'<p class="muted">Matched by description keywords: context, not proof that any CVE affects your server.</p>'}
+let deb=null;function recalc(){clearTimeout(deb);deb=setTimeout(go,120)}
+async function go(){try{
+  const body={budget_inr:+budget.value||0,impact_inr:{'SQL injection':+$('i-sql').value,'Brute force':+$('i-bf').value,'DDoS':+$('i-ddos').value},success_probability:{'SQL injection':+$('s-sql').value/100,'Brute force':+$('s-bf').value/100,'DDoS':+$('s-ddos').value/100}};
+  if(days.value)body.period_days=+days.value;if(target.value)body.target_reduction=+target.value/100;
+  if(body.budget_inr<=0){body.budget_inr=1}
+  X=await j('/api/v1/servers/'+server.value+'/budget-plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  X.budget_inr=+budget.value||0;render()}catch(err){hline.textContent=err.message}}
+// ---------- render everything
+function render(){hero();layers();donut();curve();perattack();buildTab();compare();road();evidence();reportHtml()}
+function hero(){const rem=X.baseline_loss_inr?X.residual_loss_inr/X.baseline_loss_inr:0;$('arc').style.strokeDashoffset=314*(1-rem);tween($('gpct'),Math.round(rem*100),v=>Math.round(v)+'%');
+  tween($('lbefore'),X.baseline_loss_inr,v=>inr(v)+'/yr');tween($('lafter'),X.residual_loss_inr,v=>inr(v)+'/yr');
+  hline.innerHTML=`Spending <b>${inr(X.allocated_inr)}</b> of ${inr(X.budget_inr)} avoids <b>${inr(X.loss_avoided_inr)}</b> a year (${(X.reduction_pct*100).toFixed(0)}%) · ₹${X.return_per_rupee.toFixed(1)} avoided per ₹1 · ${X.selected.length} controls funded.`;
+  clearInterval(timer);timer=setInterval(()=>{const s=(Date.now()-tickT0)/1000;$('tk0').textContent=inr(X.baseline_loss_inr/31536000*s);$('tk1').textContent=inr(X.residual_loss_inr/31536000*s)},200)}
+function layers(){const C=X.catalogue,fund=new Set(X.selected.map(c=>c.id));$('layers').innerHTML=X.layers.map(L=>{const cs=C.filter(c=>c.layer===L.id),on=cs.filter(c=>fund.has(c.id));return `<div class="layer ${on.length?'lit':''}"><h4>${on.length?'🛡️':'⚪'} ${e(L.name)}</h4>${cs.map(c=>`<div class="c ${fund.has(c.id)?'on':''}">${fund.has(c.id)?'✓':'+'} ${e(c.name)}</div>`).join('')}</div>`}).join('')}
+function donut(){const R=X.allocation.rows,c=$('donut'),x=c.getContext('2d');x.clearRect(0,0,220,220);const tot=R.reduce((s,r)=>s+r.cost_inr,0)+X.allocation.unspent_inr||1;let a0=-Math.PI/2;const segs=[...R.map((r,i)=>({n:r.category,v:r.cost_inr,col:CATC[i%5],r})),...(X.allocation.unspent_inr>0?[{n:'Unspent',v:X.allocation.unspent_inr,col:'#dfe5f5'}]:[])];
+  segs.forEach(s=>{s.a0=a0;s.a1=a0+s.v/tot*Math.PI*2;a0=s.a1;x.beginPath();x.moveTo(110,110);x.arc(110,110,s.n===selCat?104:96,s.a0,s.a1);x.closePath();x.fillStyle=s.col;x.fill()});
+  x.beginPath();x.arc(110,110,56,0,7);x.fillStyle='#fff';x.fill();x.fillStyle='#1b2447';x.font='700 15px system-ui';x.textAlign='center';x.fillText(inr(X.allocated_inr),110,112);x.fillStyle='#667090';x.font='11px system-ui';x.fillText('allocated',110,128);
+  c.onclick=ev=>{const b=c.getBoundingClientRect(),px=(ev.clientX-b.left)*220/b.width-110,py=(ev.clientY-b.top)*220/b.height-110;let a=Math.atan2(py,px);if(a<-Math.PI/2)a+=Math.PI*2;const s=segs.find(s=>a>=s.a0&&a<s.a1);if(s&&s.r){selCat=s.n;donut();detail()}};
+  $('dleg').innerHTML=segs.map(s=>`<div class="pat" style="cursor:pointer;border-left:6px solid ${s.col}" data-c="${e(s.n)}"><b>${e(s.n)}</b> ${inr(s.v)} <span class="muted">(${Math.round(s.v/tot*100)}%)</span></div>`).join('');
+  $('dleg').querySelectorAll('[data-c]').forEach(d=>d.onclick=()=>{selCat=d.dataset.c;donut();detail()});detail()}
+function detail(){const r=X.allocation.rows.find(r=>r.category===selCat);if(!r){ddetail.innerHTML='Click a slice to see what to buy.';return}
+  ddetail.innerHTML=`<b>${e(r.category)}</b>`+X.action_plan.filter(c=>c.category===r.category).map(c=>`<div class="pat"><b>${e(c.name)}</b> — ${inr(c.cost_inr)}<br><span class="muted"><b>Buy:</b> ${e(c.buy)}</span>`+c.options.map(o=>`<div class="muted">• <a href="${e(o.url)}" target="_blank" rel="noopener">${e(o.provider)}</a>: ${e(o.detail)}</div>`).join('')+'</div>').join('')}
+function curve(){const st=X.protection_curve,dp=X.diminishing_point,c=$('frontier'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);if(!st.length)return;
+  const mx=Math.max(...st.map(p=>p.cost_inr),X.budget_inr),Xp=v=>44+v/mx*(w-64),Y=v=>h-32-v*(h-56);x.strokeStyle='#e3e8f5';x.fillStyle='#667090';x.font='11px system-ui';x.textAlign='left';[0,.25,.5,.75,1].forEach(g=>{x.beginPath();x.moveTo(44,Y(g));x.lineTo(w-20,Y(g));x.stroke();x.fillText(Math.round(g*100)+'%',8,Y(g)+4)});
+  const g=x.createLinearGradient(0,0,w,0);g.addColorStop(0,'#3b6cf6');g.addColorStop(1,'#7c5cff');x.strokeStyle=g;x.lineWidth=2.5;x.beginPath();st.forEach((p,i)=>{const px=Xp(p.cost_inr),py=Y(p.reduction_pct);if(i){x.lineTo(px,Y(st[i-1].reduction_pct));x.lineTo(px,py)}else x.moveTo(px,py)});x.lineTo(Xp(mx),Y(st[st.length-1].reduction_pct));x.stroke();
+  x.setLineDash([4,4]);x.strokeStyle='#f2a516';x.beginPath();x.moveTo(Xp(X.budget_inr),10);x.lineTo(Xp(X.budget_inr),h-32);x.stroke();x.setLineDash([]);x.fillStyle='#b87b00';x.fillText('you are here',Math.min(Xp(X.budget_inr)+4,w-80),34);
+  x.fillStyle='#f2a516';x.beginPath();x.arc(Xp(X.budget_inr),Y(X.reduction_pct),6,0,7);x.fill();
+  if(dp){x.fillStyle='#16a37f';x.beginPath();x.arc(Xp(dp.cost_inr),Y(dp.reduction_pct),5,0,7);x.fill();x.fillText('80% of max',Math.min(Xp(dp.cost_inr)+8,w-70),Y(dp.reduction_pct)+16)}
+  x.fillStyle='#667090';x.fillText('budget →',w-60,h-10);x.fillText('loss avoided ↑',44,12);
+  const gl=X.gordon_loeb;gist.innerHTML=`<ul style="margin:4px 0 4px 18px"><li>Best modelled protection with this catalogue: <b>${Math.round(st[st.length-1].reduction_pct*100)}%</b> for ${inr(st[st.length-1].cost_inr)}.</li>`+(dp?`<li>About <b>${inr(dp.cost_inr)}</b> already buys ${Math.round(dp.reduction_pct*100)}%. After that each rupee buys much less.</li>`:'')+`<li>Gordon–Loeb: optimal spend is at most ~37% of expected loss: about <b>${inr(gl.cap_inr)}</b>.</li></ul><span style="font-size:12px">${e(gl.note)} ${srcLink(gl.sources)}</span>`}
+function perattack(){$('perattack').innerHTML=X.per_attack.map(a=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;flex-wrap:wrap"><b>${e(a.attack)}</b><span>${inr(a.baseline_loss_inr)} → <b style="color:#16a37f">${inr(a.residual_loss_inr)}</b> /yr · cut ${(a.reduction_pct*100).toFixed(0)}%</span></div><div class="bar"><i style="width:${a.reduction_pct*100}%"></i></div><div class="muted" style="font-size:12px">${(a.incidents_per_year||0).toFixed(1)} incidents/yr × ${Math.round((a.success_probability||0)*100)}% succeed × ${inr(a.impact_inr)} per success${a.exposure_multiplier>1?` × ${a.exposure_multiplier} CVE exposure`:''}</div></div>`).join('')}
+// ---------- simulator
+const LCOL=['#3b6cf6','#7c5cff','#f2a516','#16a37f'];
+function passProb(attack,layer,prot){if(!prot)return 1;const fund=new Set(X.selected.map(c=>c.id));return X.catalogue.filter(c=>c.layer===layer&&fund.has(c.id)).reduce((r,c)=>r*(1-Math.min(c.effect[attack]||0,.999)),1)}
+document.querySelectorAll('.atk').forEach(b=>b.onclick=()=>simulate(b.dataset.a));
+function simulate(attack){if(!X)return;const run=++simRun,cv=$('sim'),x=cv.getContext('2d'),W=cv.width,H=cv.height,N=28,prot=$('prot').checked,L=X.layers;
+  const gx=L.map((_,i)=>230+i*150),P=L.map(l=>passProb(attack,l.id,prot)),col=attack==='DDoS'?'#7c5cff':attack==='SQL injection'?'#f0506e':'#f2a516';
+  const pk=Array.from({length:N},(_,i)=>{let stop=-1;for(let k=0;k<L.length;k++){if(Math.random()>P[k]){stop=k;break}}return{y:30+Math.random()*(H-90),t0:i*90,stop,x:40,dead:false,hit:false}});
+  const stats={blocked:L.map(()=>0),hit:0};let t0=performance.now();
+  (function frame(t){if(run!==simRun)return;const el=t-t0;x.clearRect(0,0,W,H);
+   x.fillStyle='#667090';x.font='600 12px system-ui';x.textAlign='center';x.fillText('Attacker',40,16);x.fillText('Your server',W-48,16);
+   L.forEach((l,i)=>{const lit=X.selected.some(c=>c.layer===l.id)&&prot;x.fillStyle=lit?LCOL[i]:'#dfe5f5';x.fillRect(gx[i]-5,26,10,H-70);x.fillStyle=lit?LCOL[i]:'#9aa5c8';x.fillText(l.name,gx[i],H-30);x.font='11px system-ui';x.fillText(lit?'pass '+Math.round(P[i]*100)+'%':(prot?'unprotected':'off'),gx[i],H-14);x.font='600 12px system-ui'});
+   x.fillStyle='#eef1fb';x.fillRect(W-80,26,60,H-70);x.fillStyle='#1b2447';x.fillText('🗄️',W-50,H/2);
+   let alive=0;pk.forEach(p=>{if(el<p.t0)return;p.x=40+(el-p.t0)*.32;let lim=W-85;if(p.stop>=0)lim=gx[p.stop]-8;
+     if(!p.dead&&!p.hit&&p.x>=lim){if(p.stop>=0){p.dead=true;stats.blocked[p.stop]++;p.flash=el}else{p.hit=true;stats.hit++;p.flash=el}p.x=lim}
+     if(!p.dead&&!p.hit)alive++;
+     x.beginPath();x.arc(p.x,p.y,p.dead?5:6,0,7);x.fillStyle=p.dead?'#16a37f':p.hit?'#f0506e':col;x.globalAlpha=p.dead||p.hit?.9:1;x.fill();x.globalAlpha=1;
+     if(p.dead||p.hit){x.fillStyle=p.dead?'#16a37f':'#f0506e';x.font='700 11px system-ui';x.fillText(p.dead?'✕':'!',p.x+12,p.y+4);x.font='600 12px system-ui'}});
+   const fin=el>N*90+3500||(alive===0&&el>N*90);const b=base()[attack]||0,rr=X.per_attack.find(a=>a.attack===attack);
+   simres.innerHTML=`<b>${e(attack)}</b>: ${stats.blocked.reduce((s,v)=>s+v,0)} blocked, <b style="color:#f0506e">${stats.hit} got through</b> of ${N} requests.`+(fin?`<br>`+L.map((l,i)=>stats.blocked[i]?`<span class="chip">${e(l.name)} stopped ${stats.blocked[i]}</span>`:'').join('')+`<br>Modelled yearly loss from this attack: <b>${inr(b)}</b> unprotected → <b style="color:#16a37f">${inr(rr?rr.residual_loss_inr:b)}</b> with this plan.`:'');
+   if(!fin)requestAnimationFrame(frame)})(t0)}
+$('prot').onchange=()=>{simRun++;$('simres').textContent='Choose an attack.'};
+// ---------- build your own
+function buildTab(){const C=X.catalogue,B=X.budget_inr;[...cart].forEach(i=>{if(!cat()[i])cart.delete(i)});
+  const spent=[...cart].reduce((s,i)=>s+cat()[i].cost_inr,0),opt=bestAt(B),mine=baseTotal()-resid(cart),pct=v=>baseTotal()?Math.round(v/baseTotal()*100):0;
+  $('bscore').innerHTML=`<div class="bar"><i style="width:${Math.min(100,B?spent/B*100:0)}%;${spent>B?'background:#f0506e':''}"></i></div><div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:6px"><span>Spent <b>${inr(spent)}</b> of ${inr(B)}</span><span>Your protection <b>${pct(mine)}%</b> (${inr(mine)}/yr avoided)</span><span>AI plan at this budget <b>${pct(opt.loss_avoided_inr)}%</b> (${inr(opt.loss_avoided_inr)}/yr)</span></div>`+(cart.size?`<div class="note" style="margin-top:8px">${spent>B?'Over budget: remove something.':mine>=opt.loss_avoided_inr-1?'🏆 You matched the optimiser!':`You are ${pct(opt.loss_avoided_inr-mine)} points behind the optimiser. Try swapping controls.`}</div>`:'');
+  $('shop').innerHTML=C.map(c=>{const inn=cart.has(c.id),pre=(c.prerequisites||[]).filter(p=>!cart.has(p)),no=!inn&&(pre.length||spent+c.cost_inr>B);return `<div class="item ${inn?'in':''} ${no?'no':''}" data-i="${c.id}"><b>${inn?'✓ ':''}${e(c.name)}</b><div class="muted">${inr(c.cost_inr)} · ${e(X.layers.find(l=>l.id===c.layer).name)}</div><div>${Object.entries(c.effect).map(([k,v])=>`<span class="chip">${e(k)} −${Math.round(v*100)}%</span>`).join('')}</div>${pre.length?`<div class="muted" style="font-size:12px">Needs ${pre.map(p=>e(cat()[p].name)).join(', ')} first</div>`:''}</div>`}).join('');
+  $('shop').querySelectorAll('.item').forEach(d=>d.onclick=()=>{const id=d.dataset.i,c=cat()[id];if(cart.has(id)){cart.delete(id);cart.forEach(k=>{if((cat()[k].prerequisites||[]).includes(id))cart.delete(k)})}else{const sp=[...cart].reduce((s,i)=>s+cat()[i].cost_inr,0);if(c.prerequisites.every(p=>cart.has(p))&&sp+c.cost_inr<=X.budget_inr)cart.add(id)}buildTab()})}
+$('breveal').onclick=()=>{cart=new Set(bestAt(X.budget_inr).controls);buildTab()};$('bclear').onclick=()=>{cart.clear();buildTab()};
+// ---------- compare
+function compare(){const B=X.budget_inr,gl=X.gordon_loeb.cap_inr,defs=[['Lean',B*.5],['Balanced',B],['Maximum',B*2]],N=n=>Object.fromEntries(X.catalogue.map(c=>[c.id,c.name]))[n];
+  const pl=defs.map(([n,b])=>({n,b,f:bestAt(b)}));const rec=[...pl].reverse().find(p=>p.f.cost_inr<=gl)||pl[0],mx=pl[2].f.loss_avoided_inr;
+  $('cmp').innerHTML=pl.map(p=>`<div class="plan3 ${p===rec?'rec':''}">${p===rec?'<span class="tag">Recommended</span>':''}<h3 style="margin:0">${p.n}</h3><div class="muted">budget ${inr(p.b)}</div><div class="big" style="margin:8px 0">${baseTotal()?Math.round(p.f.loss_avoided_inr/baseTotal()*100):0}%</div><div class="muted">protection · avoids ${inr(p.f.loss_avoided_inr)}/yr</div><p>Spends <b>${inr(p.f.cost_inr)}</b>${p.f.loss_avoided_inr>0?` · pays back in ~${Math.max(1,Math.round(p.f.cost_inr/p.f.loss_avoided_inr*12))} month(s)`:''}</p><div>${p.f.controls.map(i=>`<span class="chip">${e(N(i))}</span>`).join('')||'<span class="muted">Nothing fits</span>'}</div>${p.f.loss_avoided_inr<mx-1?`<p class="muted" style="font-size:12px">Gives up ${Math.round((mx-p.f.loss_avoided_inr)/(baseTotal()||1)*100)} points of protection vs Maximum.</p>`:''}</div>`).join('');
+  $('cmpnote').textContent='Recommended = the biggest plan that stays within the Gordon–Loeb ceiling (about 37% of expected loss, '+inr(gl)+'), or Lean if none does. A sanity check, not a rule.'}
+// ---------- roadmap
+function roadOrder(){return X.action_plan.map(a=>a)}
+function road(){const A=roadOrder(),base0=baseTotal(),ids=[];let day=0;const pts=[{d:0,v:base0}];A.forEach(a=>{day+=a.deploy_days;ids.push(a.id);pts.push({d:day,v:resid(ids),a})});
+  const c=$('road'),x=c.getContext('2d'),w=c.width,h=c.height,D=Math.max(90,day),Xp=d=>44+d/D*(w-64),Y=v=>h-34-(base0?v/base0:0)*(h-60);x.clearRect(0,0,w,h);x.fillStyle='#667090';x.font='11px system-ui';x.strokeStyle='#e3e8f5';
+  [0,30,60,90].forEach(d=>{x.beginPath();x.moveTo(Xp(d),10);x.lineTo(Xp(d),h-34);x.stroke();x.fillText('day '+d,Xp(d)-12,h-16)});
+  x.strokeStyle='#7c5cff';x.lineWidth=2.5;x.beginPath();pts.forEach((p,i)=>{if(i){x.lineTo(Xp(p.d),Y(pts[i-1].v));x.lineTo(Xp(p.d),Y(p.v))}else x.moveTo(Xp(0),Y(p.v))});x.lineTo(Xp(D),Y(pts[pts.length-1].v));x.stroke();
+  pts.slice(1).forEach(p=>{x.beginPath();x.arc(Xp(p.d),Y(p.v),6,0,7);x.fillStyle=done.has(p.a.id)?'#16a37f':'#fff';x.fill();x.strokeStyle=TIERC[p.a.tier];x.lineWidth=2.5;x.stroke()});
+  x.fillStyle='#667090';x.fillText(inr(base0),4,Y(base0)+4);
+  const now=resid([...done]);$('roadnow').innerHTML=`Loss right now with ${done.size} of ${A.length} actions done: <span style="color:#16a37f">${inr(now)}/yr</span> <span class="muted">(${inr(base0-now)} avoided)</span>`;
+  let d2=0;$('roadlist').innerHTML=A.map(a=>{d2+=a.deploy_days;return `<label class="rd"><input type="checkbox" data-id="${e(a.id)}" ${done.has(a.id)?'checked':''}><div><b>${e(a.name)}</b> <span class="badge" style="background:${TIERC[a.tier]};color:#fff">${e(a.when)}</span> <span class="muted">· done by day ${d2}</span><div class="muted">${e(a.action)}</div></div></label>`}).join('')||'<span class="muted">No actions at this budget.</span>';
+  $('roadlist').querySelectorAll('input').forEach(i=>i.onchange=()=>{i.checked?done.add(i.dataset.id):done.delete(i.dataset.id);road()})}
+// ---------- evidence
+function evidence(){$('period').textContent=X.period_note||'';mincost.innerHTML=X.min_cost_for_target?`Cheapest way to cut loss by ${Math.round(X.min_cost_for_target.target_reduction*100)}%: <b>${inr(X.min_cost_for_target.cost_inr)}</b>.`:(target.value?'No combination reaches that target.':'');
+  actions.innerHTML=X.action_plan.map((c,i)=>`<div class="pat" style="border-left:4px solid ${TIERC[c.tier]}"><b>${i+1}. ${e(c.name)}</b> <span class="badge" style="background:${TIERC[c.tier]};color:#fff">${e(c.when)}</span> <span class="muted">≈ ${c.deploy_days} day(s) · ${inr(c.cost_inr)}</span>`+(c.why.length?`<div class="muted"><b>Why now:</b> ${c.why.map(e).join(' ')}</div>`:'')+`<div class="muted"><b>What to buy:</b> ${e(c.buy)}</div><ol class="muted" style="margin:6px 0 4px 18px">${c.steps.map(t=>`<li>${e(t)}</li>`).join('')}</ol>`+c.options.map(o=>`<div class="muted">• <a href="${e(o.url)}" target="_blank" rel="noopener"><b>${e(o.provider)}</b></a>: ${e(o.detail)}</div>`).join('')+`<div class="muted" style="font-size:12px"><b>Evidence:</b> ${e(c.evidence)} ${srcLink(c.sources)}</div></div>`).join('')||'No control fits this budget.';
+  intel.innerHTML=ATT.map(a=>{const I=X.attack_intel[a];return `<div class="pat"><h3 style="margin:0 0 4px">${e(a)} <span class="muted">· ${e(I.severity)}</span></h3><b>What it damages</b><ul class="muted" style="margin:4px 0 4px 18px">${I.hampers.map(t=>`<li>${e(t)}</li>`).join('')}</ul><b>Research</b><ul class="muted" style="margin:4px 0 4px 18px">${I.facts.map(f=>`<li>${e(f.text)} <a href="${e(f.url)}" target="_blank" rel="noopener">[source]</a></li>`).join('')}</ul><div class="muted" style="font-size:12px">${e(I.impact_note)}</div></div>`}).join('');
+  catalogue.innerHTML=`<table><tr><th>Element</th><th>Cost</th><th>Gist</th><th>Worldwide options</th><th>Adds / loses</th></tr>`+X.catalogue.map(c=>`<tr><td><b>${e(c.name)}</b><br><span class="muted">${e(c.category)}${c.funded?' · <b style="color:#16a37f">in your plan</b>':''}</span></td><td>${inr(c.cost_inr)}</td><td class="muted">${e(c.evidence)}<br>${srcLink(c.sources)}</td><td class="muted">${c.options.map(o=>`<a href="${e(o.url)}" target="_blank" rel="noopener">${e(o.provider)}</a>: ${e(o.detail)}`).join('<br>')}</td><td>${inr(c.gain_inr)}/yr</td></tr>`).join('')+`</table><p class="muted">USD prices converted at ₹${X.usd_inr}/US$; vendors change prices.</p>`;
+  srcs.innerHTML='<ol style="margin-left:18px">'+X.sources.map(v=>`<li><a href="${e(v.url)}" target="_blank" rel="noopener">${e(v.title)}</a></li>`).join('')+'</ol>'}
+// ---------- printable report
+function reportHtml(){$('report').innerHTML=`<h1>CyberQuant AI: cyber-security budget plan</h1><p>Server: ${e(server.selectedOptions[0]?.textContent||'')} · Budget ${inr(X.budget_inr)} · ${new Date().toLocaleDateString('en-IN')}</p>
+  <h2>Result</h2><p>Modelled yearly loss falls from <b>${inr(X.baseline_loss_inr)}</b> to <b>${inr(X.residual_loss_inr)}</b> (${(X.reduction_pct*100).toFixed(0)}% reduction) for ${inr(X.allocated_inr)}.</p>
+  <h2>Where the money goes</h2><table><tr><th>Area</th><th>Amount</th><th>Controls</th></tr>${X.allocation.rows.map(r=>`<tr><td>${e(r.category)}</td><td>${inr(r.cost_inr)}</td><td>${r.controls.map(e).join(', ')}</td></tr>`).join('')}</table>
+  <h2>Actions, in order</h2><table><tr><th>#</th><th>Action</th><th>When</th><th>Cost</th></tr>${X.action_plan.map((c,i)=>`<tr><td>${i+1}</td><td>${e(c.name)}: ${e(c.action)}</td><td>${e(c.when)}</td><td>${inr(c.cost_inr)}</td></tr>`).join('')}</table>
+  <h2>Loss by attack</h2><table><tr><th>Attack</th><th>Before</th><th>After</th></tr>${X.per_attack.map(a=>`<tr><td>${e(a.attack)}</td><td>${inr(a.baseline_loss_inr)}</td><td>${inr(a.residual_loss_inr)}</td></tr>`).join('')}</table>
+  <p style="font-size:11px">Prices are published vendor list prices (USD at ₹${X.usd_inr}); protection percentages and per-incident impacts are modelling assumptions informed by cited research. Sources: ${X.sources.map(s=>e(s.title)).join('; ')}.</p>`}
+$('print').onclick=()=>window.print();
+// ---------- wiring
+$('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('tabs').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id==='p-'+b.dataset.t));if(X){donut();curve();road()}});
+$('slider').oninput=()=>{budget.value=slider.value;recalc()};budget.oninput=()=>{slider.value=Math.min(+budget.value||0,1500000);recalc()};
+['i-sql','i-bf','i-ddos','s-sql','s-bf','s-ddos','days','target'].forEach(i=>$(i).onchange=recalc);
+link.onclick=async()=>{try{await j('/api/v1/servers/'+server.value+'/asset',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({asset_id:asset.value||null})});linkst.textContent='Saved.';recalc()}catch(err){linkst.textContent=err.message}};
+load().catch(err=>detected.textContent=err.message)
+</script></html>

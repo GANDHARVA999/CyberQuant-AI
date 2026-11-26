@@ -1,0 +1,6 @@
+asset_id,asset_name,asset_type,vendor,product,version,internet_exposed,business_criticality,estimated_loss_inr,environment,owner_team,existing_control_strength
+AST-001,Public Web Server,web_server,ExampleVendor,ExampleWeb,2.4.1,1,5,2000000,production,Platform,0.35
+AST-002,Customer Database,database,ExampleVendor,ExampleDB,5.2.0,0,5,5000000,production,Data,0.55
+AST-003,Internal App Server,application_server,ExampleVendor,ExampleApp,1.8.3,0,3,800000,internal,Applications,0.45
+AST-004,Employee Laptop Fleet,endpoint_fleet,ExampleVendor,ExampleOS,11.0,0,3,1200000,corporate,IT Operations,0.5
+AST-005,Backup Service,backup_service,ExampleVendor,ExampleBackup,3.1.0,0,4,2500000,production,Infrastructure,0.6

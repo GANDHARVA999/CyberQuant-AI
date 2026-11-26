@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CyberQuant AI | Sign in</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/theme.css">
+<div class="auth">
+<section class="auth-art"><div class="brand" style="position:relative;z-index:1"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.6-7 10-3.8-1.4-7-5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span>CyberQuant AI<small>Cyber risk intelligence</small></span></div>
+<div style="position:relative;z-index:1"><h2>Know which requests are attacks, and where your security budget should go.</h2><p>Connect a server, watch traffic in real time, review borderline cases and let the platform optimise your protection spend.</p>
+<ul><li>Genuine vs brute force, SQL injection and DDoS, classified live</li><li>Learns from your reviews: same user, same IP, same pattern</li><li>Budget plans that cut the most loss for the least money</li></ul></div>
+<small style="position:relative;z-index:1;opacity:.8">SDG 9 · Industry, Innovation and Infrastructure</small></section>
+<section class="auth-form"><main class="auth-card"><span class="eyebrow">Secure analyst access</span>
+<div class="tabs" role="tablist" style="display:flex;gap:6px;margin:14px 0 4px"><button type="button" id="tin" class="tabbtn on" role="tab">Sign in</button><button type="button" id="tup" class="tabbtn" role="tab">Create account</button></div>
+<h1 id="ttl" style="margin-top:10px">Welcome back</h1><p class="muted" id="sub">Sign in to see the security posture of your registered sites and servers.</p>
+<form id="form"><label>User ID<input id="username" autocomplete="username" required autofocus minlength="1" maxlength="80"></label>
+<label>Password<span style="position:relative;display:block"><input id="password" type="password" autocomplete="current-password" required style="padding-right:64px"><button type="button" id="eye" aria-label="Show password" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);width:auto;margin:0;padding:6px 10px;background:none;border:0;color:var(--muted,#667);font-weight:600;cursor:pointer">Show</button></span></label>
+<div id="meter" style="display:none;margin-top:8px"><div style="height:6px;border-radius:3px;background:#e4e9f4;overflow:hidden"><i id="bar" style="display:block;height:100%;width:0;background:#e5484d;transition:width .2s,background .2s"></i></div><small id="hint" class="muted">Use 12+ characters with upper-case, lower-case and a number.</small></div>
+<label id="cwrap" style="display:none">Confirm password<input id="confirm" type="password" autocomplete="new-password"></label>
+<button class="primary" id="go">Sign in</button><div id="error" class="error" role="alert"></div></form>
+<p class="muted" id="demo" style="font-size:12.5px;margin-top:18px"></p></main></section></div>
+<style>.tabbtn{width:auto!important;margin:0!important;padding:8px 16px!important;background:transparent;border:1px solid var(--line,#d9e0ef);border-radius:10px;font-weight:600;cursor:pointer;color:inherit}.tabbtn.on{background:var(--brand,#6c63ff);color:#fff;border-color:transparent}</style>
+<script>
+const $=id=>document.getElementById(id);let mode='in',cfg={signup_enabled:true};
+const setMode=m=>{mode=m;const up=m==='up';$('tin').classList.toggle('on',!up);$('tup').classList.toggle('on',up);$('ttl').textContent=up?'Create your account':'Welcome back';$('sub').textContent=up?'Pick a user ID and a strong password. You can sign in straight away.':'Sign in to see the security posture of your registered sites and servers.';$('go').textContent=up?'Create account':'Sign in';$('meter').style.display=$('cwrap').style.display=up?'block':'none';$('confirm').required=up;$('password').autocomplete=up?'new-password':'current-password';$('error').textContent=''};
+$('tin').onclick=()=>setMode('in');$('tup').onclick=()=>setMode('up');
+$('eye').onclick=()=>{const h=$('password').type==='password';$('password').type=h?'text':'password';$('confirm').type=h?'text':'password';$('eye').textContent=h?'Hide':'Show'};
+function score(p){let n=0;if(p.length>=12)n++;if(p.length>=16)n++;if(/[a-z]/.test(p)&&/[A-Z]/.test(p))n++;if(/\d/.test(p))n++;if(/[^A-Za-z0-9]/.test(p))n++;return n}
+$('password').oninput=()=>{if(mode!=='up')return;const n=score($('password').value),c=['#e5484d','#e5484d','#f0a020','#f0a020','#2fb67c','#2fb67c'][n];$('bar').style.width=n*20+'%';$('bar').style.background=c;$('hint').textContent=['Too short','Weak','Fair','Okay','Strong','Very strong'][n]+(n<4?'. Use 12+ characters with upper-case, lower-case and a number.':'.')};
+fetch('/api/v1/auth/config').then(r=>r.json()).then(c=>{cfg=c;if(!c.signup_enabled)$('tup').style.display='none'}).catch(()=>{});
+fetch('/api/v1/auth/me').then(r=>r.json()).then(m=>{if(m.authenticated)location='/home'}).catch(()=>{});
+$('form').onsubmit=async x=>{x.preventDefault();const er=$('error');er.textContent='';
+ if(mode==='up'){if($('password').value!==$('confirm').value){er.textContent='The two passwords do not match.';return}}
+ $('go').disabled=true;
+ try{const r=await fetch('/api/v1/auth/'+(mode==='up'?'register':'login'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:$('username').value.trim(),password:$('password').value})});
+  const d=await r.json().catch(()=>({}));
+  if(r.ok)location=d.must_change_password?'/settings':'/home';
+  else er.textContent=Array.isArray(d.detail)?'Check the form: user ID needs 3+ letters, numbers, dots or dashes; password needs 12+ characters.':(d.detail||'Something went wrong. Try again.')}
+ catch(_){er.textContent='Cannot reach the server. Check that it is running and try again.'}
+ $('go').disabled=false};
+</script>
+</html>

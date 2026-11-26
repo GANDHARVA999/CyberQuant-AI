@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CyberQuant AI | Home</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/theme.css">
+<style>
+.hero{background:var(--grad);color:#fff;border-radius:22px;padding:38px 40px;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(91,92,246,.28)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.1)}.hero::before{width:340px;height:340px;right:-90px;top:-130px}.hero::after{width:220px;height:220px;right:150px;bottom:-130px}
+.hero h1{font-size:36px;margin:0 0 8px;position:relative}.hero p{margin:0;opacity:.92;max-width:560px;position:relative}
+.sec{display:flex;align-items:end;justify-content:space-between;margin:34px 0 14px}.sec h2{margin:0;font-size:20px}
+.srv{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.s{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;transition:transform .15s,box-shadow .15s,border-color .15s}
+.s:hover{transform:translateY(-3px);border-color:#c9bbff;box-shadow:0 14px 34px rgba(91,92,246,.18)}
+.s .top{display:flex;gap:12px;align-items:center}.ico{width:44px;height:44px;border-radius:12px;background:var(--grad-soft);display:grid;place-items:center;color:var(--purple)}.ico svg{width:22px;height:22px}
+.s h3{margin:0;font-size:16px}.s .host{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats div{background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:8px 12px}.stats b{display:block;font-size:18px}.stats span{font-size:11px;color:var(--muted)}
+.pill{margin-left:auto;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px}.live{background:var(--green-l);color:#0d7a5e}.idle{background:var(--amber-l);color:#8a5f00}.wait{background:var(--line2);color:var(--muted)}
+.s button{width:100%;padding:11px}
+.add{grid-column:1/-1;flex-direction:row!important;gap:18px;min-height:96px!important;border:2px dashed #c9bbff;background:linear-gradient(135deg,#faf8ff,#f3f6ff);box-shadow:none;align-items:center;justify-content:center;text-align:center;cursor:pointer;color:var(--purple-d)}
+.add .plus{width:52px;height:52px;border-radius:50%;background:var(--grad);color:#fff;font-size:30px;display:grid;place-items:center;box-shadow:0 8px 18px rgba(91,92,246,.35)}
+.token{white-space:pre-wrap;background:var(--purple-l);color:var(--purple-d);border:1px dashed #c9bbff;padding:14px;border-radius:10px;overflow-wrap:anywhere;font-family:ui-monospace,Consolas,monospace;margin:10px 0}
+#addPanel{display:none}#addPanel input{width:100%}.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.out{background:none;border:0;color:var(--muted);font-weight:600}@media(max-width:800px){.fields{grid-template-columns:1fr}.hero{padding:28px 22px}}
+</style>
+<header class="topbar"><div class="topbar-in"><a class="brand" href="/home"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.6-7 10-3.8-1.4-7-5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span>CyberQuant AI<small>Cyber risk intelligence</small></span></a>
+<nav class="links"><a class="on" href="/home">Home</a><a href="/threat-center">Live traffic</a><a href="/server-ai">Budget plan</a><a href="/dashboard">Risk overview</a><button class="out" id="out">Sign out</button></nav></div></header>
+<main class="page">
+<section class="hero"><h1 id="hello">Hello 👋</h1><p>Choose the server you want to connect to. Once you are in, you will see its live traffic, which requests are genuine and which are attacks, and the best way to spend your security budget.</p></section>
+<div class="sec"><div><h2>Your servers</h2><div class="muted" id="count">Loading…</div></div></div>
+<section class="srv" id="list"></section>
+<section class="card" id="addPanel"><h2>Add a new server</h2>
+<p class="note warn">Use an agent or webhook on a server you own or are authorised to monitor. Never provide SSH credentials, passwords, request bodies, cookies or customer data: the connector sends metadata only (<code>python -m src.connector_agent</code>).</p>
+<form id="form"><div class="fields"><label>Display name<input id="name" required placeholder="Production web server"></label><label>Hostname / identifier<input id="host" required placeholder="api.example.com"></label><label>Sector<input id="sector" required placeholder="E-commerce, finance, health…"></label></div>
+<div class="row"><button class="primary">Create server &amp; get connector token</button><button type="button" id="cancel">Cancel</button></div></form><div id="result"></div></section>
+</main>
+<script>
+const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const j=async(u,o)=>{const r=await fetch(u,o),d=await r.json();if(!r.ok)throw Error(d.detail||'Request failed');return d};
+const ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>';
+function status(s){if(!s.last_event_at)return['wait','Waiting for agent'];const m=(Date.now()-new Date(s.last_event_at.endsWith('Z')||/[+-]\d\d:\d\d$/.test(s.last_event_at)?s.last_event_at:s.last_event_at+'Z'))/60000;return m<15?['live','Live']:['idle','Idle']}
+function connect(id){try{localStorage.setItem('cq_server',id)}catch(e){}location='/threat-center'}
+function card(s){const[c,t]=status(s);return `<div class="s"><div class="top"><div class="ico">${ICON}</div><div><h3>${esc(s.display_name)}</h3><div class="host">${esc(s.hostname)} · ${esc(s.sector)}</div></div><span class="pill ${c}">${t}</span></div>
+<div class="stats"><div><b>${(s.events_received||0).toLocaleString()}</b><span>requests seen</span></div><div><b>${(s.threat_events||0).toLocaleString()}</b><span>flagged as attacks</span></div></div>
+<button class="primary" data-id="${s.id}">Connect to this server →</button></div>`}
+async function load(){const s=await j('/api/v1/servers');$('count').textContent=s.length?s.length+' connected. Pick one to continue.':'No server connected yet. Add your first one below.';
+ $('list').innerHTML=s.map(card).join('')+'<div class="s add" id="addCard"><div class="plus">+</div><b>Add new server</b><span class="muted">Connect another server to monitor</span></div>';
+ document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>connect(b.dataset.id));$('addCard').onclick=openAdd}
+function openAdd(){$('addPanel').style.display='block';$('addPanel').scrollIntoView({behavior:'smooth',block:'center'});$('name').focus()}
+$('cancel').onclick=()=>{$('addPanel').style.display='none';$('result').innerHTML=''};
+$('form').onsubmit=async e=>{e.preventDefault();try{const x=await j('/api/v1/servers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({display_name:$('name').value,host:undefined,hostname:$('host').value,sector:$('sector').value})});
+ $('result').innerHTML=`<h3>Connector token: copy it now</h3><div class="token">${esc(x.agent_token)}</div><p class="muted">Send metadata-only events to <code>/api/v1/telemetry/${x.server_id}</code> with header <code>X-Agent-Token</code>. The token is shown only once.</p><button class="primary" onclick="connect(${x.server_id})">Connect to this server →</button>`;$('form').reset();load()}catch(x){$('result').innerHTML='<p class="error">'+esc(x.message)+'</p>'}};
+$('out').onclick=async()=>{try{await fetch('/api/v1/auth/logout',{method:'POST'})}catch(e){}location='/'};
+(async()=>{const m=await j('/api/v1/auth/me');if(!m.authenticated){location='/';return}const n=m.username.charAt(0).toUpperCase()+m.username.slice(1);$('hello').textContent='Hello, '+n+' 👋';load()})();
+</script></html>

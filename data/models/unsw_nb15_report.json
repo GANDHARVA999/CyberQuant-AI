@@ -1,0 +1,1029 @@
+{
+  "model_type": "Logistic regression binary network-flow classifier",
+  "dataset": "UNSW-NB15 predefined train/test partition",
+  "dataset_url": "https://research.unsw.edu.au/projects/unsw-nb15-dataset",
+  "dataset_citation": "Moustafa, N. and Slay, J. (2015), UNSW-NB15.",
+  "trained_at": "2026-10-22T07:39:25.238909+00:00",
+  "training_records": 175341,
+  "test_records": 82332,
+  "attack_detection": {
+    "precision": 0.8020381778081983,
+    "recall": 0.9305567810817965,
+    "f1-score": 0.8615309206764153,
+    "support": 45332.0
+  },
+  "accuracy": 0.8353009765340329,
+  "confusion_matrix": [
+    [
+      26588,
+      10412
+    ],
+    [
+      3148,
+      42184
+    ]
+  ],
+  "sample_detections": [
+    {
+      "id": 43680,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22372,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 20129,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51549,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 19841,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 8959,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "DoS",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 8960,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22368,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22369,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22371,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22343,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22344,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22345,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 8399,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 15218,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 15219,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 15224,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 43709,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 54128,
+      "proto": "udp",
+      "service": "dns",
+      "state": "CON",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 43774,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 43775,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 43815,
+      "proto": "tcp",
+      "service": "smtp",
+      "state": "CON",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 53315,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9037,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "DoS",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9038,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9040,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 8804,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44267,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 53318,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 11030,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "DoS",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 11035,
+      "proto": "tcp",
+      "service": "smtp",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 49251,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 7349,
+      "proto": "tcp",
+      "service": "smtp",
+      "state": "CON",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 2727,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "DoS",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 8379,
+      "proto": "udp",
+      "service": "-",
+      "state": "CON",
+      "attack_cat": "DoS",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 78862,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Normal",
+      "actual_label": 0,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 78865,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Normal",
+      "actual_label": 0,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 78872,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Normal",
+      "actual_label": 0,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 78880,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Normal",
+      "actual_label": 0,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 78898,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Normal",
+      "actual_label": 0,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 78912,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Normal",
+      "actual_label": 0,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44122,
+      "proto": "tcp",
+      "service": "-",
+      "state": "CON",
+      "attack_cat": "DoS",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44419,
+      "proto": "tcp",
+      "service": "ssl",
+      "state": "FIN",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44437,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 78850,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Normal",
+      "actual_label": 0,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 78858,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Normal",
+      "actual_label": 0,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 8385,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44182,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44229,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 21288,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 8851,
+      "proto": "tcp",
+      "service": "ftp-data",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 12653,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51703,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51708,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51712,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51770,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 1760,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 1181,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "DoS",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51776,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51785,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51793,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "DoS",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9129,
+      "proto": "udp",
+      "service": "dns",
+      "state": "CON",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9138,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44540,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44282,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 47885,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44330,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44349,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44697,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44698,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58061,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Reconnaissance",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58063,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Fuzzers",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58055,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58058,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22315,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44503,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44520,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44525,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 8827,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9117,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9154,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51800,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Fuzzers",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22316,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 51811,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9144,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9179,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22317,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9156,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9158,
+      "proto": "tcp",
+      "service": "ftp-data",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22354,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 9209,
+      "proto": "tcp",
+      "service": "pop3",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22355,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44721,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 44752,
+      "proto": "tcp",
+      "service": "http",
+      "state": "FIN",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58200,
+      "proto": "tcp",
+      "service": "-",
+      "state": "FIN",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58101,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58105,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Exploits",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58108,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Reconnaissance",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 58110,
+      "proto": "sctp",
+      "service": "-",
+      "state": "INT",
+      "attack_cat": "Fuzzers",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    },
+    {
+      "id": 22324,
+      "proto": "udp",
+      "service": "dns",
+      "state": "INT",
+      "attack_cat": "Generic",
+      "actual_label": 1,
+      "predicted_attack": 1,
+      "attack_probability": 1.0
+    }
+  ],
+  "scope_notice": "Offline UNSW-NB15 benchmark results. These are not observations from a connected server."
+}

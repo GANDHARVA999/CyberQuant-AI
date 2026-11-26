@@ -1,0 +1,3 @@
+asset_id,cve_id,installed_product,installed_version,finding_status,discovered_at,patch_available,verified_remediated_at
+AST-001,CVE-YYYY-NNNN,ExampleWeb,2.4.1,open,2026-10-01,unknown,
+AST-002,CVE-YYYY-NNNN,ExampleDB,5.2.0,open,2026-10-02,unknown,

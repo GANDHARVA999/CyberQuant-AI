@@ -1,0 +1,6 @@
+action_id,action_name,action_type,cost_inr,effectiveness_estimate,implementation_days,prerequisites,affected_asset_ids,evidence_type
+ACT-001,Patch internet-facing server,patch,100000,0.75,2,,AST-001,illustrative_assumption
+ACT-002,Upgrade vulnerable application,upgrade,200000,0.8,5,,AST-003,illustrative_assumption
+ACT-003,Strengthen identity and access controls,access_control,300000,0.45,10,,AST-001;AST-002;AST-003,illustrative_assumption
+ACT-004,Deploy endpoint detection,monitoring,250000,0.3,7,,AST-004,illustrative_assumption
+ACT-005,Improve backup and recovery,recovery,150000,0.25,4,,AST-002;AST-005,illustrative_assumption

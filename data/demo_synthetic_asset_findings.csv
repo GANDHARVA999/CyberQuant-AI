@@ -1,0 +1,7 @@
+asset_id,cve_id,installed_product,installed_version,finding_status,discovered_at,patch_available,verified_remediated_at
+AST-001,CVE-2025-0168,DemoWebStack,2.4.1,open,2026-10-22,unknown,
+AST-001,CVE-2025-0171,DemoWebStack,2.4.1,open,2026-10-22,unknown,
+AST-002,CVE-2025-22214,DemoDatabase,5.2.0,open,2026-10-22,unknown,
+AST-003,CVE-2025-0172,DemoApplication,1.8.3,open,2026-10-22,unknown,
+AST-004,CVE-2025-0173,DemoEndpointOS,11.0,open,2026-10-22,unknown,
+AST-005,CVE-2025-0174,DemoBackupService,3.1.0,open,2026-10-22,unknown,

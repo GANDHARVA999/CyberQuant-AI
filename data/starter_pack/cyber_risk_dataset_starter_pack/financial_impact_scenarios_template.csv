@@ -1,0 +1,5 @@
+scenario_id,scenario_name,asset_id,loss_low_inr,loss_base_inr,loss_high_inr,time_horizon_days,source_type,assumptions
+SCN-001,Web service compromise,AST-001,250000,2000000,8000000,30,synthetic_example,Replace with documented organization-specific estimates
+SCN-002,Database data exposure,AST-002,500000,5000000,20000000,30,synthetic_example,Replace with documented organization-specific estimates
+SCN-003,Application downtime,AST-003,100000,800000,3000000,30,synthetic_example,Replace with documented organization-specific estimates
+SCN-004,Endpoint incident,AST-004,100000,1200000,5000000,30,synthetic_example,Replace with documented organization-specific estimates
