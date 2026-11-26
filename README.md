@@ -11,7 +11,7 @@ python -m venv .venv; .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 python -m src.demo                     # 1-minute end-to-end demo -> output\demo_report.html (no server needed)
 python -m src.bootstrap                # first run trains the model (~15 s) and seeds a simulated demo server
-uvicorn src.api:app --reload           # open http://127.0.0.1:8000  (admin / ChangeMe!123, you must change it at first sign-in)
+uvicorn src.api:app --reload           # open http://127.0.0.1:8000  (sign in with admin / Gandharva, or create your own account on the sign-in page)
 pytest -q                              # 30+ tests
 ```
 

@@ -18,15 +18,15 @@ def client(tmp_path, monkeypatch, fast_classifier):
         yield c
 
 
-def test_default_password_must_be_changed(tmp_path, monkeypatch, fast_classifier):
+def test_default_login_works(tmp_path, monkeypatch, fast_classifier):
     from src import database, api
     monkeypatch.setattr(database, "DB_PATH", tmp_path / "d.db"); monkeypatch.setattr(api, "CLASSIFIER", fast_classifier)
     monkeypatch.delenv("CYBERQUANT_INITIAL_PASSWORD", raising=False); monkeypatch.setattr("src.demo_seed.seed_demo", lambda *a, **k: None)
     from src.bootstrap import bootstrap_templates
     bootstrap_templates()
     with TestClient(api.app) as c:
-        assert c.post("/api/v1/auth/login", json={"username": "admin", "password": "ChangeMe!123"}).json()["must_change_password"] is True
-        assert c.get("/api/v1/servers").status_code == 403
+        assert c.post("/api/v1/auth/login", json={"username": "admin", "password": "Gandharva"}).json()["must_change_password"] is False
+        assert c.get("/api/v1/servers").status_code == 200
 
 
 def test_connect_send_review_and_budget(client):
