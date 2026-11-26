@@ -3,7 +3,7 @@ import json, zipfile
 import csv
 from datetime import datetime, timezone
 from pathlib import Path
-from .database import connection
+from ..database import connection
 
 def now(): return datetime.now(timezone.utc).isoformat()
 

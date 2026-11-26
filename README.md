@@ -9,11 +9,15 @@ three attacks (**brute force, SQL injection, DDoS**), lets an analyst review bor
 ```powershell
 python -m venv .venv; .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-python -m src.demo                     # 1-minute end-to-end demo -> output\demo_report.html (no server needed)
+python -m src.tools.demo                     # 1-minute end-to-end demo -> output\demo_report.html (no server needed)
 python -m src.bootstrap                # first run trains the model (~15 s) and seeds a simulated demo server
 uvicorn src.api:app --reload           # open http://127.0.0.1:8000  (sign in with admin / Gandharva, or create your own account on the sign-in page)
 pytest -q                              # 30+ tests
 ```
+
+## What is where
+
+See [docs/PROJECT_MAP.md](docs/PROJECT_MAP.md) for a map of every folder and file, and the README inside each folder.
 
 ## Open it from other devices on the same Wi-Fi
 
@@ -45,7 +49,7 @@ The first Google sign-in with a verified email either signs in the existing acco
 
 | Requirement | Where |
 |---|---|
-| User connects a server and sees requests | `/servers` (token) + `src/connector_agent.py` (tails nginx/Apache logs); `/threat-center` shows live requests per minute, genuine vs attack |
+| User connects a server and sees requests | `/servers` (token) + `src/tools/connector_agent.py` (tails nginx/Apache logs); `/threat-center` shows live requests per minute, genuine vs attack |
 | Genuine or attack? Which attack? | `src/engine`: rules + random-forest ML, 4 classes, one incident per attack |
 | Genuine users who mistyped a password | Incidents get a suggestion (likely genuine / needs review / likely attack); failures followed by a successful login become "likely genuine" |
 | Analyst review and categorisation for the future | `/threat-center` review queue. "Same IP, 5 failures, genuine" is remembered per source and endpoint; it is auto-allowed next time, but re-alerts if the volume grows (e.g. 40 failures) or a different IP appears. Attack decisions can raise severity or add the source(s) to a recommended blocklist. Reviews are also saved as labelled examples for `POST /api/v1/model/retrain` |

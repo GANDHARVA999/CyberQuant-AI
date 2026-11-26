@@ -5,7 +5,7 @@ from src.engine.detector import DetectionEngine
 from src.engine.features import FeatureExtractor
 from src.engine.review import ReviewMemory, allow_limit
 from src.engine.simulator import Simulator
-from src.optimizer import optimize
+from src.asset_risk.optimizer import optimize
 
 T0 = datetime(2026, 3, 1, 9, 0, tzinfo=timezone.utc)
 

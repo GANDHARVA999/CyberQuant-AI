@@ -1,3 +1,4 @@
+"""Turns one raw request record into the clean event the engine reads (time, IP, endpoint, status, user)."""
 from __future__ import annotations
 from datetime import datetime, timezone
 from .features import split_path

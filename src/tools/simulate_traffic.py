@@ -1,11 +1,11 @@
 """Send SIMULATED traffic (genuine users + brute force / SQLi / DDoS) to a running CyberQuant server, for live demos.
 
-    python -m src.simulate_traffic --url http://127.0.0.1:8000 --server-id 2 --token <TOKEN> --minutes 20
+    python -m src.tools.simulate_traffic --url http://127.0.0.1:8000 --server-id 2 --token <TOKEN> --minutes 20
 """
 import argparse
 from datetime import datetime, timedelta, timezone
 from .connector_agent import post
-from .engine.simulator import Simulator
+from ..engine.simulator import Simulator
 
 
 def main(argv=None):

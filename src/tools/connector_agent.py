@@ -1,6 +1,6 @@
 """Connector agent: tail an nginx/Apache 'combined' access log and forward METADATA-ONLY events to CyberQuant.
 
-    python -m src.connector_agent --url http://127.0.0.1:8000 --server-id 2 --token <TOKEN> --log /var/log/nginx/access.log --follow
+    python -m src.tools.connector_agent --url http://127.0.0.1:8000 --server-id 2 --token <TOKEN> --log /var/log/nginx/access.log --follow
 
 Sent per request: time, method, path+query, status, source IP, user-agent, and (optionally) a salted hash of the account name.
 Never sent: request bodies, cookies, Authorization headers, passwords. Standard library only, so it runs on any server with Python 3.

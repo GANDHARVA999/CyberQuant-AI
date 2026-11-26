@@ -1,5 +1,5 @@
-from src.risk import calculate_asset_risk
-from src.optimizer import optimize
+from src.asset_risk.risk import calculate_asset_risk
+from src.asset_risk.optimizer import optimize
 
 def asset(): return {"internet_exposed":1,"business_criticality":5,"estimated_loss_inr":1_000_000,"existing_control_strength":.4}
 

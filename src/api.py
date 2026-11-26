@@ -1,3 +1,7 @@
+"""The web server: every URL the browser and the connector use (login, servers, live traffic, review, budget plan, pages).
+
+Run with:  uvicorn src.api:app   (or python serve.py)
+"""
 from typing import Literal
 import json
 import os
@@ -14,11 +18,11 @@ from threading import Lock
 from pydantic import BaseModel, Field
 from .database import connection, initialize
 from .bootstrap import bootstrap_templates
-from .ingestion import ingest_nvd_zip, import_asset_findings
-from .risk import calculate_asset_risk
-from .optimizer import optimize
+from .asset_risk.ingestion import ingest_nvd_zip, import_asset_findings
+from .asset_risk.risk import calculate_asset_risk
+from .asset_risk.optimizer import optimize
 from .settings import ROOT, MODEL_VERSION, INGEST_DIR
-from .threat_detection import classify_event
+from .asset_risk.threat_detection import classify_event
 from . import incident_store as istore
 from .engine import ATTACK_TYPES
 from .engine.cve_link import ATTACK_CWE, ATTACK_KEYWORDS, keyword_sql
@@ -476,7 +480,7 @@ def threat_priorities(limit: int = Query(5, ge=1, le=25)):
 @app.get("/api/v1/intrusion-detection/report")
 def intrusion_detection_report():
     report = ROOT / "data" / "models" / "unsw_nb15_report.json"
-    if not report.exists(): raise HTTPException(404, "No trained intrusion model report is available. Run python -m src.intrusion_model.")
+    if not report.exists(): raise HTTPException(404, "No trained intrusion model report is available. Run python -m src.asset_risk.intrusion_model.")
     return json.loads(report.read_text(encoding="utf-8"))
 
 @app.get("/api/v1/assets/{asset_id}")

@@ -1,5 +1,5 @@
 """Asset-level remediation optimiser (NVD/CVE side). Uses the same exact, overlap-aware engine as the attack budget planner."""
-from .engine.budget import optimise
+from ..engine.budget import optimise
 
 
 def optimize(actions, asset_risks, budget):

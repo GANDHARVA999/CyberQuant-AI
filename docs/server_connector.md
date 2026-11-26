@@ -4,7 +4,7 @@
 2. On the server, run the connector agent (standard library only, Python 3.9+). It tails an nginx/Apache *combined* access log:
 
 ```bash
-python -m src.connector_agent --url https://YOUR-CYBERQUANT-HOST --server-id 2 --token <TOKEN> \
+python -m src.tools.connector_agent --url https://YOUR-CYBERQUANT-HOST --server-id 2 --token <TOKEN> \
        --log /var/log/nginx/access.log --follow --account-regex 'user=([^&]+)' --salt <secret>
 ```
 
@@ -24,4 +24,4 @@ advisory hint; the engine decides. Open **/threat-center** to see live traffic a
 **Blocklist:** sources an analyst marks "recommend blocking" are available to your connector at `GET /api/v1/telemetry/{server_id}/blocklist`
 (same token). CyberQuant never changes your firewall; your connector or firewall must enforce the list.
 
-**Try it without a server:** `python -m src.simulate_traffic --url http://127.0.0.1:8000 --server-id 2 --token <TOKEN>` sends simulated traffic.
+**Try it without a server:** `python -m src.tools.simulate_traffic --url http://127.0.0.1:8000 --server-id 2 --token <TOKEN>` sends simulated traffic.

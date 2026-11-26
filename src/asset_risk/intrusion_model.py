@@ -12,7 +12,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.linear_model import LogisticRegression
-from .settings import ROOT
+from ..settings import ROOT
 
 DATASET_URL = "https://research.unsw.edu.au/projects/unsw-nb15-dataset"
 DATASET_CITATION = "Moustafa, N. and Slay, J. (2015), UNSW-NB15."

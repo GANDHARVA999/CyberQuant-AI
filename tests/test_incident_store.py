@@ -71,7 +71,7 @@ def test_retrain_from_reviews_adds_labelled_examples(con, monkeypatch, tmp_path)
 
 
 def test_connector_parses_combined_log_and_hashes_account():
-    from src.connector_agent import parse_line
+    from src.tools.connector_agent import parse_line
     line = '203.0.113.9 - - [01/Mar/2026:09:00:05 +0000] "POST /login?user=alice HTTP/1.1" 401 512 "-" "Mozilla/5.0 (X11)"'
     e = parse_line(line, account_regex=r"user=([^&]+)", salt="s")
     assert e["source_ip"] == "203.0.113.9" and e["response_status"] == 401 and e["request_method"] == "POST"

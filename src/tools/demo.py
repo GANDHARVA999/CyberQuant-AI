@@ -1,4 +1,4 @@
-"""End-to-end demonstration on SIMULATED traffic. Run:  python -m src.demo   (writes output/demo_report.html)
+"""End-to-end demonstration on SIMULATED traffic. Run:  python -m src.tools.demo   (writes output/demo_report.html)
 
 1. a server sends traffic (genuine users, forgetful users, an office behind one IP, brute force, SQLi, DDoS)
 2. every request is classified genuine / Brute force / SQL injection / DDoS and grouped into incidents
@@ -10,11 +10,11 @@ import html, json, sys, tempfile
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from . import database, incident_store as st
-from .engine.detector import DetectionEngine
-from .engine.model import Classifier
-from .engine.simulator import Simulator
-from .settings import ROOT
+from .. import database, incident_store as st
+from ..engine.detector import DetectionEngine
+from ..engine.model import Classifier
+from ..engine.simulator import Simulator
+from ..settings import ROOT
 
 CHECK = "✓"
 

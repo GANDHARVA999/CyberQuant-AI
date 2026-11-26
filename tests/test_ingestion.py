@@ -1,6 +1,6 @@
 import json, zipfile
 from pathlib import Path
-from src.ingestion import ingest_nvd_zip
+from src.asset_risk.ingestion import ingest_nvd_zip
 from src.database import initialize, connection
 
 def test_nvd_ingestion_is_idempotent(monkeypatch):

@@ -1,4 +1,4 @@
-from src.threat_detection import classify_event
+from src.asset_risk.threat_detection import classify_event
 
 
 def test_sqli_signature_creates_explained_alert():
