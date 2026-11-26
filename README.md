@@ -15,6 +15,19 @@ uvicorn src.api:app --reload           # open http://127.0.0.1:8000  (sign in wi
 pytest -q                              # 30+ tests
 ```
 
+## Open it from other devices on the same Wi-Fi
+
+Double-click `run_cyberquant.bat` (or run `python serve.py`). The console prints two addresses:
+
+- `http://localhost:8000` on the laptop that runs the server.
+- `http://192.168.x.x:8000` (your laptop's Wi-Fi address) on phones and other laptops connected to the same Wi-Fi.
+
+Notes:
+- Windows asks once to allow the app through the firewall. Approve it for **private** networks only.
+- The laptop must stay on and awake, and the Wi-Fi must allow devices to talk to each other (some guest or campus networks block this).
+- Everyone on that Wi-Fi can reach the sign-in page, so use strong passwords and change the default `admin / Gandharva` login first.
+- Password sign-in and reset links work on every device. Google sign-in works from `http://localhost:8000` on the host laptop, because Google does not accept a Wi-Fi address as a redirect. To use Google sign-in from phones you need an https address, for example a free tunnel such as Cloudflare Tunnel or ngrok, then set `CYBERQUANT_BASE_URL` to that address and add `<address>/api/v1/auth/google/callback` in Google Cloud Console.
+
 ## Forgot password and Sign in with Google
 
 Both are optional and switch on from a local `.env` file (copy `.env.example` to `.env`, which is git-ignored).

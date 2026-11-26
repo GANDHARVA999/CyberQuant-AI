@@ -37,7 +37,7 @@ $('fform').onsubmit=async x=>{x.preventDefault();$('fgo').disabled=true;const m=
   if(!r.ok){m.textContent=d.detail||'Something went wrong. Try again.'}else{m.textContent=d.message;if(d.dev_link){const a=document.createElement('a');a.href=d.dev_link;a.textContent='Open the reset link';a.style.cssText='display:block;margin-top:8px;font-weight:700';m.appendChild(a);const n=document.createElement('small');n.textContent=d.dev_note;n.style.display='block';m.appendChild(n)}}}
  catch(_){m.textContent='Cannot reach the server. Check that it is running and try again.'}
  $('fgo').disabled=false};
-{const q=new URLSearchParams(location.search).get('error');if(q)$('error').textContent={google_failed:'Google sign-in did not complete. Try again.',google_cancelled:'Google sign-in was cancelled.',signup_disabled:'No account exists for that Google address, and new accounts are switched off.'}[q]||'Sign-in failed.'}
+{const q=new URLSearchParams(location.search).get('error');if(q)$('error').textContent={google_failed:'Google sign-in did not complete. Try again.',google_network:'Google sign-in only works when this app is opened as http://localhost:8000 on the host laptop (or from an https address). Sign in with your user ID and password here.',google_cancelled:'Google sign-in was cancelled.',signup_disabled:'No account exists for that Google address, and new accounts are switched off.'}[q]||'Sign-in failed.'}
 fetch('/api/v1/auth/me').then(r=>r.json()).then(m=>{if(m.authenticated)location='/home'}).catch(()=>{});
 $('form').onsubmit=async x=>{x.preventDefault();const er=$('error');er.textContent='';
  if(mode==='up'){if($('password').value!==$('confirm').value){er.textContent='The two passwords do not match.';return}}

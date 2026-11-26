@@ -153,6 +153,10 @@ def exchange_code(code: str, verifier: str, redirect_uri: str) -> str:
 def google_start(request: Request, link: int = 0):
     if not google_enabled():
         return JSONResponse({"detail": "Google sign-in is not set up. Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to .env (see README)."}, status_code=503)
+    host = urllib.parse.urlparse(base_url(request))
+    if host.scheme != "https" and host.hostname not in {"127.0.0.1", "localhost"}:
+        # Google only accepts http redirect addresses on localhost, not on a Wi-Fi address like 192.168.x.x
+        return RedirectResponse("/login.html?error=google_network")
     if link:
         try: _api().current_user(request)
         except HTTPException: return RedirectResponse("/")
