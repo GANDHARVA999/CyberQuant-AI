@@ -1,5 +1,16 @@
 <!doctype html>
-<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CyberQuant AI | Budget &amp; protection plan</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/theme.css"><style>.controls-grid td:first-child{min-width:220px}</style>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CyberQuant AI | Budget &amp; protection plan</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/theme.css"><style>
+.frw{position:relative;touch-action:none;cursor:crosshair}.frw svg{width:100%;height:auto;display:block;border-radius:10px}
+.frw svg:focus-visible{outline:3px solid #7c5cff;outline-offset:3px}
+.frd{font-size:15px;min-height:44px;padding:8px 12px;border-radius:10px;background:#eef2ff;color:#1f2340;margin-bottom:8px;line-height:1.45}
+.frt{position:absolute;pointer-events:none;background:#1f2340;color:#fff;font-size:12.5px;line-height:1.3;padding:6px 9px;border-radius:8px;white-space:nowrap;box-shadow:0 6px 20px rgba(20,24,60,.25);transform:translate(-50%,-100%);z-index:3}
+.frchips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.frchips button{font:inherit;font-size:13px;border:1.5px solid #c9d1ff;background:#fff;color:#2f3fb0;border-radius:999px;padding:7px 13px;cursor:pointer;min-height:36px}
+.frchips button:hover,.frchips button:focus-visible{background:#eef2ff;outline:2px solid #7c5cff}
+.frtab{font-size:13px;margin:6px 0}.frtab summary{cursor:pointer;color:#2f3fb0;padding:4px 0}.frtab table{width:100%;font-size:12.5px}
+@keyframes frpulse{0%{r:7;opacity:.55}100%{r:18;opacity:0}}.frpulse{animation:frpulse 1.8s ease-out infinite}
+@media (prefers-reduced-motion:reduce){.frpulse{animation:none;opacity:.25}}
+</style>
+<style>.controls-grid td:first-child{min-width:220px}</style>
 <header class="topbar"><div class="topbar-in"><a class="brand" href="/home"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.6-7 10-3.8-1.4-7-5-7-10V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span>CyberQuant AI<small>Cyber risk intelligence</small></span></a><nav class="links"><a href="/home">Home</a><a href="/threat-center">Live traffic</a><a href="/server-ai" class="on">Budget plan</a><a href="/dashboard">Risk overview</a></nav></div></header>
 <style>
 .hero{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:center}
@@ -38,7 +49,12 @@
 <section class="pane on" id="p-over">
  <div class="card"><h2>Your protection layers</h2><div class="layers" id="layers"></div></div>
  <div class="grid2" style="margin-top:16px"><div class="card"><h2>Where the money goes</h2><div style="display:flex;gap:16px;flex-wrap:wrap"><canvas id="donut" width="220" height="220" style="cursor:pointer;width:220px;height:220px;flex:none"></canvas><div id="dleg" style="flex:1;min-width:200px"></div></div><div id="ddetail" class="muted" style="margin-top:10px">Click a slice to see what to buy.</div></div>
- <div class="card"><h2>More budget vs more protection</h2><canvas id="frontier" width="520" height="250" style="max-width:100%"></canvas><div id="gist" class="muted" style="margin-top:8px"></div></div></div>
+ <div class="card"><h2>More budget vs more protection</h2><p class="muted" style="margin:0 0 8px;font-size:13px">Hover, tap or drag on the chart to try a budget. Click or release to apply it. With the keyboard, focus the chart and use the arrow keys.</p>
+ <div id="frd" class="frd" aria-live="polite"></div>
+ <div id="frw" class="frw"><svg id="frontier" viewBox="0 0 620 300" tabindex="0" role="slider" aria-label="Budget versus protection chart. Use left and right arrow keys to change the budget." aria-valuemin="0" aria-valuemax="1500000" aria-valuenow="0" aria-valuetext="" preserveAspectRatio="xMidYMid meet"></svg><div id="frt" class="frt" hidden></div></div>
+ <div id="frchips" class="frchips"></div>
+ <details class="frtab"><summary>View the chart data as a table</summary><div id="frtable" style="max-height:260px;overflow:auto"></div></details>
+ <div id="gist" class="muted" style="margin-top:8px"></div></div></div>
  <div class="card" style="margin-top:16px"><h2>Loss before and after, by attack</h2><div id="perattack"></div></div>
 </section>
 
@@ -119,13 +135,43 @@ function donut(){const R=X.allocation.rows,c=$('donut'),x=c.getContext('2d');x.c
   $('dleg').querySelectorAll('[data-c]').forEach(d=>d.onclick=()=>{selCat=d.dataset.c;donut();detail()});detail()}
 function detail(){const r=X.allocation.rows.find(r=>r.category===selCat);if(!r){ddetail.innerHTML='Click a slice to see what to buy.';return}
   ddetail.innerHTML=`<b>${e(r.category)}</b>`+X.action_plan.filter(c=>c.category===r.category).map(c=>`<div class="pat"><b>${e(c.name)}</b> — ${inr(c.cost_inr)}<br><span class="muted"><b>Buy:</b> ${e(c.buy)}</span>`+c.options.map(o=>`<div class="muted">• <a href="${e(o.url)}" target="_blank" rel="noopener">${e(o.provider)}</a>: ${e(o.detail)}</div>`).join('')+'</div>').join('')}
-function curve(){const st=X.protection_curve,dp=X.diminishing_point,c=$('frontier'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);if(!st.length)return;
-  const mx=Math.max(...st.map(p=>p.cost_inr),X.budget_inr),Xp=v=>44+v/mx*(w-64),Y=v=>h-32-v*(h-56);x.strokeStyle='#e3e8f5';x.fillStyle='#667090';x.font='11px system-ui';x.textAlign='left';[0,.25,.5,.75,1].forEach(g=>{x.beginPath();x.moveTo(44,Y(g));x.lineTo(w-20,Y(g));x.stroke();x.fillText(Math.round(g*100)+'%',8,Y(g)+4)});
-  const g=x.createLinearGradient(0,0,w,0);g.addColorStop(0,'#3b6cf6');g.addColorStop(1,'#7c5cff');x.strokeStyle=g;x.lineWidth=2.5;x.beginPath();st.forEach((p,i)=>{const px=Xp(p.cost_inr),py=Y(p.reduction_pct);if(i){x.lineTo(px,Y(st[i-1].reduction_pct));x.lineTo(px,py)}else x.moveTo(px,py)});x.lineTo(Xp(mx),Y(st[st.length-1].reduction_pct));x.stroke();
-  x.setLineDash([4,4]);x.strokeStyle='#f2a516';x.beginPath();x.moveTo(Xp(X.budget_inr),10);x.lineTo(Xp(X.budget_inr),h-32);x.stroke();x.setLineDash([]);x.fillStyle='#b87b00';x.fillText('you are here',Math.min(Xp(X.budget_inr)+4,w-80),34);
-  x.fillStyle='#f2a516';x.beginPath();x.arc(Xp(X.budget_inr),Y(X.reduction_pct),6,0,7);x.fill();
-  if(dp){x.fillStyle='#16a37f';x.beginPath();x.arc(Xp(dp.cost_inr),Y(dp.reduction_pct),5,0,7);x.fill();x.fillText('80% of max',Math.min(Xp(dp.cost_inr)+8,w-70),Y(dp.reduction_pct)+16)}
-  x.fillStyle='#667090';x.fillText('budget →',w-60,h-10);x.fillText('loss avoided ↑',44,12);
+let frDrawn=false,frPrev=null,frDrag=false;
+const kfmt=v=>v>=1e7?'₹'+(v/1e7).toFixed(v%1e7?1:0)+' Cr':v>=1e5?'₹'+(v/1e5).toFixed(v%1e5?1:0)+' L':v>0?'₹'+Math.round(v/1e3)+'k':'₹0';
+function frPoint(b){const st=X.protection_curve;let r=st[0];for(const p of st){if(p.cost_inr<=b+1e-9)r=p;else break}return r}
+function frSet(b){b=Math.max(0,Math.min(1500000,Math.round(b/10000)*10000));budget.value=b;slider.value=b;recalc()}
+function curve(){const st=X.protection_curve,dp=X.diminishing_point;if(!st.length)return;
+  const W=620,H=300,L=58,R=22,T=22,B=46,mx=Math.max(X.budget_inr,1500000),stv=st.filter(p=>p.cost_inr<=mx),Xp=v=>L+v/mx*(W-L-R),Y=v=>H-B-v*(H-T-B),svg=$('frontier'),ns='http://www.w3.org/2000/svg';
+  const nice=(()=>{const r=mx/5,m=Math.pow(10,Math.floor(Math.log10(r))),f=r/m;return(f<=1?1:f<=2?2:f<=5?5:10)*m})();
+  let g='<defs><linearGradient id="frg" x1="0" x2="1"><stop offset="0" stop-color="#3b6cf6"/><stop offset="1" stop-color="#7c5cff"/></linearGradient><linearGradient id="fra" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7c5cff" stop-opacity=".28"/><stop offset="1" stop-color="#7c5cff" stop-opacity="0"/></linearGradient></defs>';
+  [0,.25,.5,.75,1].forEach(v=>{g+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#e3e8f5"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="#4a5270">${Math.round(v*100)}%</text>`});
+  for(let v=0;v<=mx+1;v+=nice)g+=`<line x1="${Xp(v)}" x2="${Xp(v)}" y1="${H-B}" y2="${H-B+5}" stroke="#9aa3c4"/><text x="${Xp(v)}" y="${H-B+20}" text-anchor="middle" font-size="12" fill="#4a5270">${kfmt(v)}</text>`;
+  let d='';stv.forEach((p,i)=>{const px=Xp(p.cost_inr),py=Y(p.reduction_pct);d+=i?`L${px},${Y(stv[i-1].reduction_pct)}L${px},${py}`:`M${px},${py}`});d+=`L${Xp(mx)},${Y(stv[stv.length-1].reduction_pct)}`;
+  g+=`<path id="fra" d="${d}L${Xp(mx)},${H-B}L${Xp(0)},${H-B}Z" fill="url(#fra)" ${frDrawn?'':'opacity="0"'}/><path id="frl" d="${d}" fill="none" stroke="url(#frg)" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const cur=frPoint(X.budget_inr),bx=Xp(X.budget_inr),by=Y(X.reduction_pct);
+  g+=`<line x1="${bx}" x2="${bx}" y1="${T-6}" y2="${H-B}" stroke="#f2a516" stroke-width="2" stroke-dasharray="5 4"/><circle class="frpulse" cx="${bx}" cy="${by}" r="7" fill="#f2a516"/><circle cx="${bx}" cy="${by}" r="7" fill="#f2a516" stroke="#fff" stroke-width="2.5"/>`;
+  const lx=bx>W-150?bx-8:bx+8,anc=bx>W-150?'end':'start';
+  g+=`<text x="${lx}" y="${T+6}" text-anchor="${anc}" font-size="13" font-weight="700" fill="#9a6600">Your fund: ${kfmt(X.budget_inr)} → ${Math.round(X.reduction_pct*100)}%</text>`;
+  if(dp){const dx=Xp(dp.cost_inr),dy=Y(dp.reduction_pct);g+=`<circle cx="${dx}" cy="${dy}" r="6.5" fill="#16a37f" stroke="#fff" stroke-width="2.5"/><text x="${dx+10}" y="${dy+20}" font-size="12.5" font-weight="600" fill="#0d7a5e">Best value: ${kfmt(dp.cost_inr)} → ${Math.round(dp.reduction_pct*100)}%</text>`}
+  g+=`<text x="${(L+W-R)/2}" y="${H-6}" text-anchor="middle" font-size="12.5" fill="#4a5270">Yearly security budget</text><text transform="translate(14,${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="12.5" fill="#4a5270">Share of yearly loss avoided</text>`;
+  g+='<g id="frhov" visibility="hidden"><line id="frhl" y1="'+(T-6)+'" y2="'+(H-B)+'" stroke="#3b4bd6" stroke-width="1.5"/><circle id="frhc" r="6" fill="#fff" stroke="#3b4bd6" stroke-width="3"/></g>';
+  svg.innerHTML=g;svg.setAttribute('aria-valuemax',Math.round(mx));svg.setAttribute('aria-valuenow',Math.round(X.budget_inr));
+  const txt=`Budget ${inr(X.budget_inr)}: ${Math.round(X.reduction_pct*100)} percent of yearly loss avoided`;svg.setAttribute('aria-valuetext',txt);
+  if(!frDrawn){const l=$('frl'),len=l.getTotalLength();if(!matchMedia('(prefers-reduced-motion: reduce)').matches){l.style.strokeDasharray=len;l.style.strokeDashoffset=len;l.getBoundingClientRect();l.style.transition='stroke-dashoffset 1.1s ease-out';l.style.strokeDashoffset=0;setTimeout(()=>{const a=$('fra');a.style.transition='opacity .6s';a.setAttribute('opacity','1')},700)}else $('fra').setAttribute('opacity','1');frDrawn=true}
+  const readout=(b,pt,label)=>{$('frd').innerHTML=`<b>${label}: ${inr(b)}</b> avoids about <b>${Math.round(pt.reduction_pct*100)}%</b> of yearly loss (${inr(pt.loss_avoided_inr)})${pt.added&&pt.added.length?` · this step adds <b>${e(pt.added.join(', '))}</b>`:''}.`};
+  readout(X.budget_inr,{reduction_pct:X.reduction_pct,loss_avoided_inr:X.loss_avoided_inr,added:[]},'Your fund');
+  const wrap=$('frw'),tip=$('frt'),toB=ev=>{const r=svg.getBoundingClientRect(),sx=(ev.clientX-r.left)/r.width*W;return Math.max(0,Math.min(mx,(sx-L)/(W-L-R)*mx))};
+  const show=b=>{const pt=frPoint(b),x=Xp(b),y=Y(pt.reduction_pct);$('frhov').setAttribute('visibility','visible');$('frhl').setAttribute('x1',x);$('frhl').setAttribute('x2',x);$('frhc').setAttribute('cx',x);$('frhc').setAttribute('cy',y);
+    const r=svg.getBoundingClientRect();tip.hidden=false;tip.style.left=Math.max(115,Math.min(r.width-115,x/W*r.width))+'px';tip.style.top=Math.max(44,y/H*r.height-14)+'px';
+    tip.innerHTML=`<b>${kfmt(b)}</b> → ${Math.round(pt.reduction_pct*100)}% avoided`;readout(b,pt,frDrag?'Release to apply':'Previewing');frPrev=b};
+  const hide=()=>{$('frhov').setAttribute('visibility','hidden');tip.hidden=true;readout(X.budget_inr,{reduction_pct:X.reduction_pct,loss_avoided_inr:X.loss_avoided_inr,added:[]},'Your fund')};
+  svg.onpointermove=ev=>show(toB(ev));svg.onpointerleave=()=>{if(!frDrag)hide()};
+  svg.onpointerdown=ev=>{frDrag=true;svg.setPointerCapture(ev.pointerId);show(toB(ev));svg.focus({preventScroll:true})};
+  svg.onpointerup=ev=>{if(frDrag){frDrag=false;frSet(toB(ev));hide()}};svg.onpointercancel=()=>{frDrag=false;hide()};
+  svg.onkeydown=ev=>{const k=ev.key,step=ev.shiftKey?50000:10000;let b=X.budget_inr;if(k==='ArrowRight'||k==='ArrowUp')b+=step;else if(k==='ArrowLeft'||k==='ArrowDown')b-=step;else if(k==='PageUp')b+=100000;else if(k==='PageDown')b-=100000;else if(k==='Home')b=0;else if(k==='End')b=1500000;else return;ev.preventDefault();frSet(b)};
+  const chips=[['Best value',dp&&dp.cost_inr,dp?`Best value ${inr(dp.cost_inr)} (${Math.round(dp.reduction_pct*100)}%)`:''],['Max',1500000,`Top of the slider ${inr(1500000)} (${Math.round(frPoint(1500000).reduction_pct*100)}%)`]].filter(c=>c[1]);
+  $('frchips').innerHTML='<span class="muted" style="font-size:13px;align-self:center">Jump to:</span>'+chips.map((c,i)=>`<button type="button" data-b="${c[1]}">${e(c[2])}</button>`).join('');
+  $('frchips').querySelectorAll('button').forEach(bt=>bt.onclick=()=>frSet(+bt.dataset.b));
+  $('frtable').innerHTML='<table><tr><th>Budget</th><th>Loss avoided</th><th>Per year</th><th>This step adds</th></tr>'+st.map(p=>`<tr><td>${inr(p.cost_inr)}</td><td>${Math.round(p.reduction_pct*100)}%</td><td>${inr(p.loss_avoided_inr)}</td><td>${e((p.added||[]).join(', ')||'–')}</td></tr>`).join('')+'</table>';
   const gl=X.gordon_loeb;gist.innerHTML=`<ul style="margin:4px 0 4px 18px"><li>Best modelled protection with this catalogue: <b>${Math.round(st[st.length-1].reduction_pct*100)}%</b> for ${inr(st[st.length-1].cost_inr)}.</li>`+(dp?`<li>About <b>${inr(dp.cost_inr)}</b> already buys ${Math.round(dp.reduction_pct*100)}%. After that each rupee buys much less.</li>`:'')+`<li>Gordon–Loeb: optimal spend is at most ~37% of expected loss: about <b>${inr(gl.cap_inr)}</b>.</li></ul><span style="font-size:12px">${e(gl.note)} ${srcLink(gl.sources)}</span>`}
 function perattack(){$('perattack').innerHTML=X.per_attack.map(a=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;flex-wrap:wrap"><b>${e(a.attack)}</b><span>${inr(a.baseline_loss_inr)} → <b style="color:#16a37f">${inr(a.residual_loss_inr)}</b> /yr · cut ${(a.reduction_pct*100).toFixed(0)}%</span></div><div class="bar"><i style="width:${a.reduction_pct*100}%"></i></div><div class="muted" style="font-size:12px">${(a.incidents_per_year||0).toFixed(1)} incidents/yr × ${Math.round((a.success_probability||0)*100)}% succeed × ${inr(a.impact_inr)} per success${a.exposure_multiplier>1?` × ${a.exposure_multiplier} CVE exposure`:''}</div></div>`).join('')}
 // ---------- simulator
